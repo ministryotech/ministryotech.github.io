@@ -1,0 +1,184 @@
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from www.minotech.co.uk/development/blog/the-pylon-is-live/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <script>
+        // Pure JavaScript 'JS enabled' hook for styling
+        var _ = document.getElementsByTagName('html')[0];
+        _.className = _.className.replace(/(?:^|\s)no-js(?!\S)/g, 'js');
+    </script>
+
+    <meta charset="utf-8" />
+    <title>The Pylon is Live - The Ministry of Technology</title>
+    <meta name="description" content="Holistic Technical Counsel - Agile Software Development & Management with a difference" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../images/ministry/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/ministry/apple-touch-icon-114x114-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/ministry/apple-touch-icon-72x72-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" href="../../../images/ministry/apple-touch-icon-precomposed9078.png?v=7.1.0.25803" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../css/development-style.min91af.css?v=7.1.0.25813" />
+    <!-- References -->
+    <link rel="author" href="../../../humans.txt" />
+
+    <!-- Scripts to execute before page load begins -->
+    <script src="../../../../use.typekit.net/sha1jar.js"></script>
+    <script>try { Typekit.load(); } catch (e) { }</script>
+</head>
+<body class="dev-body">
+    <div class="wide-bg">
+        <img src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="" />
+    </div>
+    <div class="outer">
+        <header>
+            <a href="../../../developers/index.html" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
+            <!--[if IE]><p>This site is optimised for HTML5 and CSS3 and is not supported by IE9 or lower. <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->
+<i class="menu-button fa fa-bars"></i>
+<nav id="js-nav" class="bp-wide">
+    <ul>
+                <li><a href="../../../index.html">Home</a></li>                <li><a href="../../index.html">Development</a></li>                <li><a href="../../mentoring/index.html">Mentoring</a></li>                <li><a class="selected" href="../index.html">Blog</a></li>                <li><a href="../../open-source-projects/index.html">Open Source</a></li>                <li><a href="../../../contact/index.html">Contact</a></li>    </ul>
+</nav>        </header>
+        <!--[if gt IE 9]><!-->
+        <div class="inner">
+            <section class="page-title-or-logo">
+                    <h1> The Pylon is Live </h1>
+                                    <section class="subdata">
+                        
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 07/07/2015</span>
+            <span class="article-metadata"><i class="article-metadata__icon fa fa-cogs"></i><a href='../../../services/custom-development.html'>Custom Development</a></span>
+
+                    </section>
+            </section>
+            <img class="mobile-fold" src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="Show Menu" />
+            <div class="block-container ">
+                    <section class="element-block element-block--intro element-block--title">
+                        <div class="element-block__content">
+                            <h1> The Pylon is Live </h1>
+                                <section class="subdata">
+                                    
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 07/07/2015</span>
+            <span class="article-metadata"><i class="article-metadata__icon fa fa-cogs"></i><a href='../../../services/custom-development.html'>Custom Development</a></span>
+
+                                </section>
+                        </div>
+                    </section>
+                
+
+
+
+<div class="main-strip">
+    <section class="element-block element-block--main">
+        <article class="element-block__content">
+    <p>The Umbraco Pylon project has been sat on the back-burner for over 6 months now as we've been tweaking it and evolving it alongside the redevelopment of this site. This week that all changed and the newly refurbished Umbraco Pylon project was isolated and pushed up to Github and NuGet. You can read all about Pylon <a href="../../open-source-projects/umbraco-pylon/index.html" title="Umbraco Pylon">here</a>.</p>
+<h2>Why Pylon?</h2>
+<p>The documentation itself can be fairly daunting so, as a primer, why would I want to use the Umbraco Pylon framework in my project?</p>
+<p>If you are a .net based web application developer and you are building application that requires content to be managed by a CMS then you either have the option of using an existing CMS (of which Umbraco is undoubtedly the king of the crop) or rolling your own if you want more control over how your application functions. The key objective behind Pylon was to provide the necessary supporting classes and tools to give you the best of both options.</p>
+<h3>Pylon and TDD</h3>
+<p>Pylon is designed first and foremost to allow you to use best practice development methods such as TDD and BDD with your CMS development. From layered controllers (which wrap up custom controllers to enable the inner code to be unit tested), strongly typed Models and View Models to the linked Umbraco.Pylon.TestSupport library that provides base test classes and objects for mocking out CMS content and media, a Pylon based Umbraco implementation will be much easier to build tests for.</p>
+<h3>Take What You Like</h3>
+<p>Pylon has several elements that all hang together but many features are optional so your solution can be as complex or simple as suits your implementation. Controllers, for example, can be either Layered (testable) or Simple (untestable without much pain). View Models can be used or you can take the easy option and use the DocumentType classes that Pylon gives you to feed your views directly. With views themselves you can either use dynamics by using CurrentPage or DynamicModel (they are the same thing in Pylon) or you can use a Strongly Typed model based on a provided instance of IPublishedContent.</p>
+<h2>Pylon Architectures</h2>
+<p>Pylon should provide all that you need to build a CMS based app in one of three key architectures. The Ministry site itself uses the combined model.</p>
+<h3>Traditional Model</h3>
+<p>In the Traditional Model the architecture is built, to a large extent, around Umbraco itself. The app code sits fully within a single website and Umbraco controls the routing to a large extent by DocumentType. Custom controllers can be added and content items wrapped to build application code on top of the content.</p>
+<p>This is essentially set up by installing Umbraco, setting up your code libraries and then adding Umbraco.Pylon NuGet references on top.</p>
+<h3>Inverted Model / Service Model</h3>
+<p>In the inverted or service model the application is built first and is the entry point for your application. In this solution the Umbraco site is not used traditionally at all and your solution will include a standard MVC site of some kind. Umbraco itself is installed separately or as a child app in a virtual directory.</p>
+<p>Within the Umbraco app Pylon defines API Controllers for providing access to content managed data as JSON. The main app can then call these controllers asynchronously. Model code can be shared between applications.</p>
+<h3>Combined Model</h3>
+<p>This type contains elements of both. Essentially based on the traditional model, with the Umbraco installation being the core of the application, API controllers are also present to enable access to data as JSON where necessary.</p>
+<h2>What's next for Pylon?</h2>
+<p>The code model and usage for the Traditional and Combined architectural models is now pretty solid. The Inverted Model needs some more proofing and investigation so there may be more additions to extend the usefulness of this approach over time or some templates to help build your architectural model up.</p>
+<p>The project will be kept up to date with new releases of Umbraco as they come out, probably a few months behind. The goal is that there will be a matching version of Pylon for whatever Umbraco install you have after 7.2.1.</p>
+</article>
+        <footer class="element-block__footer">
+                <a href="../umbraco-published-content-seems-wrong/index.html">
+        <i class="pre-icon fa fa-arrow-left"></i>
+        <span class="element-block__footer__link-text">Previous Article</span>
+    </a>
+
+        </footer>
+    </section>
+    <section class="element-block element-block--main">
+        <div id="disqus_thread" class="element-block__content element-block__content--no-footer"></div>
+    </section>
+</div>
+<nav class="sidebar sidebar--articles-selector">
+            <h1><i class="pre-icon fa fa-file-text"></i> <a href="../index.html">Latest Entries</a></h1>
+    <ul>
+                <li><a class="selected" href="index.html">The Pylon is Live</a></li>
+                <li><a href="../umbraco-published-content-seems-wrong/index.html">Umbraco Published Content seems wrong</a></li>
+                <li><a href="../open-source-products-refreshed/index.html">Open Source Products - Refreshed</a></li>
+                <li><a href="../testing-web-api-routes-with-ministry-open-source/index.html">Testing Web API Routes with Ministry Open Source</a></li>
+                <li><a href="../azure-umbraco-friends-at-last/index.html">Azure &amp; Umbraco - Friends at Last?</a></li>
+                <li><a href="../entity-framework-repositories-now-on-nuget/index.html">Entity Framework Repositories - now on nuget</a></li>
+                <li><a href="../azure-not-a-lean-solution/index.html">Azure - Not a lean solution</a></li>
+                <li><a href="../migrating-umbraco-5-to-umbraco-411/index.html">Migrating Umbraco 5 to Umbraco 4.11</a></li>
+                <li><a href="../testing-mvc-routes-with-ministry-open-source/index.html">Testing MVC Routes with Ministry Open Source</a></li>
+                <li><a href="../detecting-touch-devices/index.html">Detecting Touch Devices</a></li>
+
+    </ul>
+
+</nav>
+<script type="text/javascript">
+    var disqus_identifier = 'www.minotech.co.uk-article-1337';
+    var disqus_title = 'The Pylon is Live';
+    var disqus_url = 'index.html';
+</script>
+
+            </div>
+        </div>
+        <footer class="brand-footer">
+            <div class="brand-footer__notes">
+                <p class="brand-footer__copyright"><i class="fa fa-copyright"></i> 2021 Keith Jackson (The Ministry of Technology)</p>
+                <p class="brand-footer__strapline">
+                    Pragmatic Agile Coaching & Consultancy, Software Development & Technical Architecture - Web, Cloud, Apps & Agile for
+                    an Alternative audience.
+                </p>
+                <p class="brand-footer__links">
+                    <a href="../../../elements/privacy-policy.html">Privacy Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/cookies-policy.html">Cookies Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/terms-and-conditions.html">Terms & Conditions</a>
+                </p>
+            </div>
+            <aside class="brand-footer__logos">
+                <section class="logos">
+    <div class="logos__social">
+        <a href="https://www.linkedin.com/company/the-ministry-of-technology/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--linkedin fa fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/ministryotech" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--twitter fa fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/agilerodent/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--instagram fa fa-instagram"></i>
+        </a>
+    </div>
+</section>
+            </aside>
+        </footer>
+        <!--<![endif]-->
+        <div class="clear"></div>
+    </div>
+    <script src="../../../js/head-1.0.3.min.js"></script>
+    <script>
+        head.js(
+'../../../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+'../../../js/ministry.min91af.js?v=7.1.0.25813',
+'../../../js/analytics91af.js?v=7.1.0.25813'
+);
+
+    </script>
+</body>
+
+<!-- Mirrored from www.minotech.co.uk/development/blog/the-pylon-is-live/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:18 GMT -->
+</html>

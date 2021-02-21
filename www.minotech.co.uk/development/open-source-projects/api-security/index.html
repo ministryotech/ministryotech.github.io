@@ -1,0 +1,312 @@
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from www.minotech.co.uk/development/open-source-projects/api-security/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <script>
+        // Pure JavaScript 'JS enabled' hook for styling
+        var _ = document.getElementsByTagName('html')[0];
+        _.className = _.className.replace(/(?:^|\s)no-js(?!\S)/g, 'js');
+    </script>
+
+    <meta charset="utf-8" />
+    <title>API Security - The Ministry of Technology</title>
+    <meta name="description" content="Holistic Technical Counsel - Agile Software Development & Management with a difference" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../images/ministry/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/ministry/apple-touch-icon-114x114-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/ministry/apple-touch-icon-72x72-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" href="../../../images/ministry/apple-touch-icon-precomposed9078.png?v=7.1.0.25803" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../css/development-style.min91af.css?v=7.1.0.25813" />
+    <!-- References -->
+    <link rel="author" href="../../../humans.txt" />
+
+    <!-- Scripts to execute before page load begins -->
+    <script src="../../../../use.typekit.net/sha1jar.js"></script>
+    <script>try { Typekit.load(); } catch (e) { }</script>
+</head>
+<body class="dev-body">
+    <div class="wide-bg">
+        <img src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="" />
+    </div>
+    <div class="outer">
+        <header>
+            <a href="../../../developers/index.html" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
+            <!--[if IE]><p>This site is optimised for HTML5 and CSS3 and is not supported by IE9 or lower. <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->
+<i class="menu-button fa fa-bars"></i>
+<nav id="js-nav" class="bp-wide">
+    <ul>
+                <li><a href="../../../index.html">Home</a></li>                <li><a href="../../index.html">Development</a></li>                <li><a href="../../mentoring/index.html">Mentoring</a></li>                <li><a href="../../blog/index.html">Blog</a></li>                <li><a class="selected" href="../index.html">Open Source</a></li>                <li><a href="../../../contact/index.html">Contact</a></li>    </ul>
+</nav>        </header>
+        <!--[if gt IE 9]><!-->
+        <div class="inner">
+            <section class="page-title-or-logo">
+                    <h1> API Security </h1>
+                            </section>
+            <img class="mobile-fold" src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="Show Menu" />
+            <div class="block-container  project-page ">
+                    <section class="element-block element-block--intro element-block--title">
+                        <div class="element-block__content">
+                            <h1> API Security </h1>
+                        </div>
+                    </section>
+                
+
+
+<div class="main-strip">
+    <section class="element-block element-block--main">
+        <div class="element-block__linked-head-image element-block__linked-head-image--align-wider-right">
+            <img src="../../../images/development/oss.jpg" alt="API Security" />
+        </div>
+        <div class="element-block__content">
+            <div class="info">
+                
+                <span class="involvement">Created by Ministry</span>
+                <dl>
+                    <dt>Language</dt>
+                    <dd>.net Standard 2.0 / C#</dd>
+                    <dt>Type</dt>
+                    <dd>Web, Library</dd>
+                </dl>
+            </div>
+            <p>APIs can be secured in various ways. The Ministry.Web.ApiSecurity package supports 3 distinct forms of API security. Multiple forms of security within a single API can be supported but not, generally, on a single method. This allows internal use and external use applications of APIs in a secure manner.</p>
+
+<p>It is dependent on the <a href="../fluent-guard.html">Fluent Guard</a> project.</p>
+
+<h2>NamedStaticApiKey</h2>
+
+<p>This is a string key based attribute that can be applied to a controller. As with 'ConfiguredStaticApiKey' it requires <strong>X-ApiKey</strong> to be passed as a header, but in this case the attribute's key relates to the key for the API key value stored in configuration, allowing multiple keys to be used in a single API.</p>
+
+<p>Usage...</p>
+
+<pre><code>[HttpPost]
+[NamedStaticApiKey("Ministry")]
+public async Task&lt;IActionResult&gt; Post([FromBody] MyModel model)
+{
+</code></pre>
+
+<p>And in configuration...</p>
+
+<pre><code>"StaticApiKeys": {
+    "Named": [
+        {
+            "Key": "Ministry",
+            "Value": "385k3q84q3k58aq934l2q304294l"
+        }
+    ]
+}
+</code></pre>
+
+<p>This suffers from the key downside that anyone intercepting the message will then know the API key to access that endpoint. For this reason, I recommend this option is only used over HTTPS. For more secure API Security, see 'MessageSignatureValidation' or 'HashedApiKey' below.</p>
+
+<h2>MessageSignatureValidation</h2>
+
+<p>This attribute provides two arguments, the first is a header name and the second is a key which relates to a secret. The header of the name provided should include a hash value, formatted to include the type. For example...</p>
+
+<pre><code>X-Signature: sha256=q98w74981n793my373878s3479357al29874s9t2x7al983s798t
+</code></pre>
+
+<p>...indicates a header called 'X-Signature' which contains a SHA256 hash string which should represent the request body. When applied, the attribute will read the message body and hash it using the secret for the key name provided and check that the hash value generated matches the value provided in the header. If it doesn't match then a 400 result "Signature Validation Failed" is returned.</p>
+
+<p>This is extremely secure as both the API endpoint and the consumer must share a known secret in order to generate comparable hashes of the message body.</p>
+
+<p>Usage...</p>
+
+<pre><code>[HttpPost]
+[MessageSignatureValidation("X-Signature", "Ministry")]
+public async Task&lt;IActionResult&gt; Post([FromBody] MyModel model)
+{
+</code></pre>
+
+<p>And in configuration...</p>
+
+<pre><code>"SignatureSecrets": {
+    "Secrets": [
+        {
+            "Key": "Ministry",
+            "Secret": "q309k8503845ak235a435234s02d375h2874"
+        },
+        {
+            "Key": "ThirdParty",
+            "Secret": "23904823l84a284028340a2l042a40234a238"
+        }
+
+    ]
+}
+</code></pre>
+
+<h3>Testing &amp; Hashing Gotchas</h3>
+
+<p>Testing this approach is a little more tricky than the others, as authorisation needs to be provided with a header that varies according to the body. You can generate good test hashes using an online tool such as https://www.freeformatter.com/hmac-generator.html</p>
+
+<p>The hashing methods remove any newline characters from the message body before hashing so it is important that the service consumer does the same thing. This is because newline characters vary in application between OS platforms and may not be comparable. When generating test hashes, make sure to remove any newline characters from the test body in the online tool.</p>
+
+<h2>HashedApiKey</h2>
+
+<p>This method combines elements from 'NamedStaticApiKey' and 'MessageSignatureValidation'. It is extremely secure as it uses secrets that must be known by both the API and consumer but it doesn't require hashing method bodies which means that it doesn't suffer from potential newline hashing issues and it can also be used with REST API calls that don't have a body and all request details come through the URL. In this case, the API Key header is passed as a hash. For example...</p>
+
+<pre><code>X-ApiKey: sha256=q98w74981n793my373878s3479357al29874s9t2x7al983s798t
+</code></pre>
+
+<p>...indicates a header called 'X-ApiKey' which contains a SHA256 hash string which should represent the request body. When applied, the attribute will read the message body and hash it using the secret for the key name provided and check that the hash value generated matches the value provided in the header. If it doesn't match then a 400 result "Key Validation Failed" is returned.</p>
+
+<p>The downsides to this approach over 'MessageSignatureValidation' is purely that it requires more configuration both for the API and consumer which need to then know both the API Key itself and the secret.</p>
+
+<p>Usage...</p>
+
+<pre><code>[HttpPost]
+[HashedApiKey("X-ApiKey", "Ministry")]
+public async Task&lt;IActionResult&gt; Post([FromBody] MyModel model)
+{
+</code></pre>
+
+<p>And in configuration...</p>
+
+<pre><code>"StaticApiKeys": {
+    "Secrets": [
+        {
+            "Key": "Ministry",
+            "Secret": "q309k8503845ak235a435234s02d375h2874",
+            "Value": "385k3q84q3k58aq934l2q304294l"
+        },
+        {
+            "Key": "ThirdParty",
+            "Secret": "23904823l84a284028340a2l042a40234a238",
+            "Value": "4398523s453k427s98s7375v23d5"
+        }
+
+    ]
+}
+</code></pre>
+
+<p>You can see from the configuration how you could easily use 'NamedStaticApiKey' and 'HashedApiKey' within the same application. They use the same Options object. In fact, all of these options can easily be combined as needed.</p>
+
+<h1>Consuming Hash Secured APIs</h1>
+
+<h2>Api Security Hash Manager</h2>
+
+<p>The Ministry.Web.ApiSecurity library contains a class called <strong>HashManager</strong> which is responsible for doing the hash check work for the attributes described above. You can also use the same class to hash your message body before submitting it if you are doing so through server side code.</p>
+
+<p>Simply create a new instance as follows...</p>
+
+<pre><code>var hashManager = new HashManager("SHA256");
+
+var hash = hashManager.Hash(valueToHash, secret);
+</code></pre>
+
+<p>Currently the hash manager will support "SHA256" or "SHA1" hashing. The parameter is case insensitive and can be expanded to add other hashing algorithms.</p>
+        </div>
+        <a class="element-block__footer-link-wrapper" href="http://github.com/ministryotech" target="_blank">
+            <footer class="element-block__footer">
+                <i class="pre-icon fa fa-github-square"></i>
+                <span class="element-block__footer__link-text">Visit us on GitHub</span>
+                <i class="post-icon fa fa-external-link"></i>
+            </footer>
+        </a>
+    </section>
+<section class="element-block element-block--main">
+    <div id="disqus_thread" class="element-block__content element-block__content--no-footer"></div>
+</section>
+</div>
+<nav class="sidebar sidebar--external-project-links">
+    <dl>
+                <dd class="ungrouped">
+                    <i class="pre-icon fa fa-github"></i><a href="https://github.com/ministryotech/api-security" target="_blank">View on GitHub</a>
+                    <i class="post-icon fa fa-external-link"></i>
+                </dd>
+                <dd class="ungrouped">
+                    <i class="pre-icon fa fa-cog"></i><a href="https://www.nuget.org/packages/Ministry.Web.ApiSecurity/" target="_blank">Install from NuGet</a>
+                    <i class="post-icon fa fa-external-link"></i>
+                </dd>
+    </dl>
+</nav>
+<nav class="sidebar sidebar--services-selector">
+    <h1><i class="pre-icon fa fa-code-fork"></i> <a href="../index.html">Open Source</a></h1>
+    <ul>
+            <li><a class="selected" href="index.html">API Security</a></li>
+            <li><a class="" href="../argument-guard/index.html">Argument Guard</a></li>
+            <li><a class="" href="../backbone-ribs/index.html">Backbone Ribs</a></li>
+            <li><a class="" href="../client-mvc/index.html">Client MVC</a></li>
+            <li><a class="" href="../compositions/index.html">Compositions</a></li>
+            <li><a class="" href="../csv/index.html">CSV</a></li>
+            <li><a class="" href="../date-time-abstractions/index.html">Date Time Abstractions</a></li>
+            <li><a class="" href="../entity-framework-repolayer/index.html">Entity Framework RepoLayer</a></li>
+            <li><a class="" href="../fluent-guard/index.html">Fluent Guard</a></li>
+            <li><a class="" href="../iis-multi-host-redirector/index.html">IIS Multi-Host Redirector</a></li>
+            <li><a class="" href="../javascript-on-load-function-stack/index.html">JavaScript On Load Function Stack</a></li>
+            <li><a class="" href="../model-builder-abstractions/index.html">Model Builder Abstractions</a></li>
+            <li><a class="" href="../reflection-helper/index.html">Reflection Helper</a></li>
+            <li><a class="" href="../responsive-mq/index.html">Responsive MQ</a></li>
+            <li><a class="" href="../simple-twitter-stream/index.html">Simple Twitter Stream</a></li>
+            <li><a class="" href="../strong-typed/index.html">Strong Typed</a></li>
+            <li><a class="" href="../test-support/index.html">Test Support</a></li>
+            <li><a class="" href="../umbraco-pylon/index.html">Umbraco Pylon</a></li>
+            <li><a class="" href="../uri-path-manager/index.html">URI Path Manager</a></li>
+            <li><a class="" href="../url-navigator/index.html">URL Navigator</a></li>
+            <li><a class="" href="../web-theming/index.html">Web Theming</a></li>
+            <li><a class="" href="../webdriver-extensions/index.html">WebDriver Extensions</a></li>
+            <li><a class="" href="../window-wrapper/index.html">Window Wrapper</a></li>
+    </ul>
+</nav>
+<script type="text/javascript">
+    var disqus_identifier = 'www.minotech.co.uk-article-4482';
+    var disqus_title = 'API Security';
+    var disqus_url = 'index.html';
+</script>
+
+            </div>
+        </div>
+        <footer class="brand-footer">
+            <div class="brand-footer__notes">
+                <p class="brand-footer__copyright"><i class="fa fa-copyright"></i> 2021 Keith Jackson (The Ministry of Technology)</p>
+                <p class="brand-footer__strapline">
+                    Pragmatic Agile Coaching & Consultancy, Software Development & Technical Architecture - Web, Cloud, Apps & Agile for
+                    an Alternative audience.
+                </p>
+                <p class="brand-footer__links">
+                    <a href="../../../elements/privacy-policy.html">Privacy Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/cookies-policy.html">Cookies Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/terms-and-conditions.html">Terms & Conditions</a>
+                </p>
+            </div>
+            <aside class="brand-footer__logos">
+                <section class="logos">
+    <div class="logos__social">
+        <a href="https://www.linkedin.com/company/the-ministry-of-technology/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--linkedin fa fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/ministryotech" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--twitter fa fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/agilerodent/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--instagram fa fa-instagram"></i>
+        </a>
+    </div>
+</section>
+            </aside>
+        </footer>
+        <!--<![endif]-->
+        <div class="clear"></div>
+    </div>
+    <script src="../../../js/head-1.0.3.min.js"></script>
+    <script>
+        head.js(
+'../../../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+'../../../js/ministry.min91af.js?v=7.1.0.25813',
+'../../../js/analytics91af.js?v=7.1.0.25813'
+);
+
+    </script>
+</body>
+
+<!-- Mirrored from www.minotech.co.uk/development/open-source-projects/api-security/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:45 GMT -->
+</html>

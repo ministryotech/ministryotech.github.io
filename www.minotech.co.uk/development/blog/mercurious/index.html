@@ -1,0 +1,184 @@
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from www.minotech.co.uk/development/blog/mercurious/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:31:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <script>
+        // Pure JavaScript 'JS enabled' hook for styling
+        var _ = document.getElementsByTagName('html')[0];
+        _.className = _.className.replace(/(?:^|\s)no-js(?!\S)/g, 'js');
+    </script>
+
+    <meta charset="utf-8" />
+    <title>Mercurious - The Ministry of Technology</title>
+    <meta name="description" content="Holistic Technical Counsel - Agile Software Development & Management with a difference" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../images/ministry/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/ministry/apple-touch-icon-114x114-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/ministry/apple-touch-icon-72x72-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" href="../../../images/ministry/apple-touch-icon-precomposed9078.png?v=7.1.0.25803" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../css/development-style.min91af.css?v=7.1.0.25813" />
+    <!-- References -->
+    <link rel="author" href="../../../humans.txt" />
+
+    <!-- Scripts to execute before page load begins -->
+    <script src="../../../../use.typekit.net/sha1jar.js"></script>
+    <script>try { Typekit.load(); } catch (e) { }</script>
+</head>
+<body class="dev-body">
+    <div class="wide-bg">
+        <img src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="" />
+    </div>
+    <div class="outer">
+        <header>
+            <a href="../../../developers/index.html" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
+            <!--[if IE]><p>This site is optimised for HTML5 and CSS3 and is not supported by IE9 or lower. <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->
+<i class="menu-button fa fa-bars"></i>
+<nav id="js-nav" class="bp-wide">
+    <ul>
+                <li><a href="../../../index.html">Home</a></li>                <li><a href="../../index.html">Development</a></li>                <li><a href="../../mentoring/index.html">Mentoring</a></li>                <li><a class="selected" href="../index.html">Blog</a></li>                <li><a href="../../open-source-projects/index.html">Open Source</a></li>                <li><a href="../../../contact/index.html">Contact</a></li>    </ul>
+</nav>        </header>
+        <!--[if gt IE 9]><!-->
+        <div class="inner">
+            <section class="page-title-or-logo">
+                    <h1> Mercurious </h1>
+                                    <section class="subdata">
+                        
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 07/07/2011</span>
+            <span class="article-metadata"><i class="article-metadata__icon fa fa-cogs"></i><a href='../../../services/propellant.html'>Propellant</a></span>
+
+                    </section>
+            </section>
+            <img class="mobile-fold" src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="Show Menu" />
+            <div class="block-container ">
+                    <section class="element-block element-block--intro element-block--title">
+                        <div class="element-block__content">
+                            <h1> Mercurious </h1>
+                                <section class="subdata">
+                                    
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 07/07/2011</span>
+            <span class="article-metadata"><i class="article-metadata__icon fa fa-cogs"></i><a href='../../../services/propellant.html'>Propellant</a></span>
+
+                                </section>
+                        </div>
+                    </section>
+                
+
+
+
+<div class="main-strip">
+    <section class="element-block element-block--main">
+        <article class="element-block__content">
+    <p>I haven't written for a while as I've been extremely busy investigating new technologies for setting up a new development team infrastructure. This work is now well underway and I wanted to share some of my findings with you, well one in particular, Mercurial.</p>
+<h2>What is Mercurial?</h2>
+<p>Mercurial is a Source Control system, similar to Subversion or TFS (or SourceSafe if you're still repairing that!) As a part of my early investigations into setting up a technology stack for the development team I wanted to revisit all of the assumptions that I would have previously made from experience over tooling for everything from testing to source control to plugins for Visual Studio. I'm not going to lie to you, I never really like Subversion - I always found it a bit like a nagging sports injury that you learn to work around so it hurts you as little as possible as your experience with it grows. I'm not knocking Subversion too much though as there wasn't anything better - until now.</p>
+<p>Mercurial and Git (not covered here in detail) are both DVCS (Distributed Version Control Systems). The joy of this is that both the working copy and the source control repository are on your local machine. This is in direct contrast to subversion where the repository only exists on the server. This allows developers to check in work on their local machines as and when they want without breaking the build for everyone else (Yes, Dave, you can put away the build hat now!). Annoyingly Subversion would often require you to check in a partial code fix, temporarily causing a break, particularly when doing heavy file renaming. You do learn ways around this as time goes on (wound analogy above) but it's not pleasant. What a DVCS introduces is two new concepts; whereas Commits &amp; Updates are performed on your local repository, in order to submit changes for everyone else you have the concept of pulling and pushing to a central repository. In fact, with Mercurial, you can have any number of repositories in this chain so you could have a site based repository and a large central repository for distributed teams.</p>
+<p>Size and Merge quality are other benefits which are made possible by the different nature of storage in Mercurial. Whereas Subversion is a file based storage system, Mercurial stores changesets and calculates the state of a given file. This also makes branching a breeze. Also, because a copy of the whole repository is available locally it all sits nicely in one file rather than having pesky '.svn' files in every single directory.</p>
+<p>Oh, and it's all still free (Microsoft what are you playing at!)</p>
+<h2>Still Loving Tortoise</h2>
+<p>For users coming from Subversion or CVS, the transition is much easier as there is a TortoiseHg Mercurial client (Hg is the symbol for Mercury). This is very similar to TortoiseSVN but with the new options attached.</p>
+<h2>Free Repositories!</h2>
+<p>Mercurial is now the TFS alternative of choice on Codeplex and recently BitBucket have started to offer free private Mercurial hosting for groups of up to five users as well as free open source project hosting. I have just recently moved the MOT Framework Extensions first from Codeplex TFS to Codeplex Mercurial and now over to BitBucket. Bug tracking and Wiki services are also offered as part of the package. SO, if you're looking to play with something new or you are soon to be starting a new project try Mercurial, you really won't look back.</p>
+<h2>More Info</h2>
+<p>You can find out more about Mercurial here...</p>
+<ul>
+<li><a href="http://mercurial.selenic.com/" target="_new">Mercurial</a></li>
+<li><a href="http://tortoisehg.bitbucket.org/" target="_new">TortoiseHG</a></li>
+<li><a href="http://bitbucket.org/" target="_new">BitBucket</a></li>
+</ul>
+</article>
+        <footer class="element-block__footer">
+                <a href="../displaying-uploaded-images-in-umbraco/index.html">
+        <i class="pre-icon fa fa-arrow-left"></i>
+        <span class="element-block__footer__link-text">Previous Article</span>
+    </a>
+    <a href="../managing-umbraco-501-performance/index.html">
+        <i class="post-icon fa fa-arrow-right"></i>
+        <span class="element-block__footer__link-text element-block__footer__link-text--right">Next Article</span>
+    </a>
+
+        </footer>
+    </section>
+    <section class="element-block element-block--main">
+        <div id="disqus_thread" class="element-block__content element-block__content--no-footer"></div>
+    </section>
+</div>
+<nav class="sidebar sidebar--articles-selector">
+            <h1><i class="pre-icon fa fa-file-text"></i> <a href="../index.html">Latest Entries</a></h1>
+    <ul>
+                <li><a href="../the-pylon-is-live/index.html">The Pylon is Live</a></li>
+                <li><a href="../umbraco-published-content-seems-wrong/index.html">Umbraco Published Content seems wrong</a></li>
+                <li><a href="../open-source-products-refreshed/index.html">Open Source Products - Refreshed</a></li>
+                <li><a href="../testing-web-api-routes-with-ministry-open-source/index.html">Testing Web API Routes with Ministry Open Source</a></li>
+                <li><a href="../azure-umbraco-friends-at-last/index.html">Azure &amp; Umbraco - Friends at Last?</a></li>
+                <li><a href="../entity-framework-repositories-now-on-nuget/index.html">Entity Framework Repositories - now on nuget</a></li>
+                <li><a href="../azure-not-a-lean-solution/index.html">Azure - Not a lean solution</a></li>
+                <li><a href="../migrating-umbraco-5-to-umbraco-411/index.html">Migrating Umbraco 5 to Umbraco 4.11</a></li>
+                <li><a href="../testing-mvc-routes-with-ministry-open-source/index.html">Testing MVC Routes with Ministry Open Source</a></li>
+                <li><a href="../detecting-touch-devices/index.html">Detecting Touch Devices</a></li>
+
+    </ul>
+
+</nav>
+<script type="text/javascript">
+    var disqus_identifier = 'www.minotech.co.uk-article-1101';
+    var disqus_title = 'Mercurious';
+    var disqus_url = 'index.html';
+</script>
+
+            </div>
+        </div>
+        <footer class="brand-footer">
+            <div class="brand-footer__notes">
+                <p class="brand-footer__copyright"><i class="fa fa-copyright"></i> 2021 Keith Jackson (The Ministry of Technology)</p>
+                <p class="brand-footer__strapline">
+                    Pragmatic Agile Coaching & Consultancy, Software Development & Technical Architecture - Web, Cloud, Apps & Agile for
+                    an Alternative audience.
+                </p>
+                <p class="brand-footer__links">
+                    <a href="../../../elements/privacy-policy.html">Privacy Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/cookies-policy.html">Cookies Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/terms-and-conditions.html">Terms & Conditions</a>
+                </p>
+            </div>
+            <aside class="brand-footer__logos">
+                <section class="logos">
+    <div class="logos__social">
+        <a href="https://www.linkedin.com/company/the-ministry-of-technology/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--linkedin fa fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/ministryotech" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--twitter fa fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/agilerodent/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--instagram fa fa-instagram"></i>
+        </a>
+    </div>
+</section>
+            </aside>
+        </footer>
+        <!--<![endif]-->
+        <div class="clear"></div>
+    </div>
+    <script src="../../../js/head-1.0.3.min.js"></script>
+    <script>
+        head.js(
+'../../../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+'../../../js/ministry.min91af.js?v=7.1.0.25813',
+'../../../js/analytics91af.js?v=7.1.0.25813'
+);
+
+    </script>
+</body>
+
+<!-- Mirrored from www.minotech.co.uk/development/blog/mercurious/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:31:13 GMT -->
+</html>

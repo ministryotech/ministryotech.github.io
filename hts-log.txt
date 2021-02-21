@@ -1,0 +1,62 @@
+HTTrack3.49-2 launched on Wed, 06 Jan 2021 11:22:03 at http://www.minotech.co.uk +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/*
+(webhttrack -q -%i -w http://www.minotech.co.uk -O "/home/keith/websites/Minotech" -n -%P -p7 -N0 -s2 -p7 -D -a -K0 -c4 -%k -A25000 -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -%s -%u )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+11:23:55	Warning: 	Retry after error 500 (Internal Server Error) at link www.minotech.co.uk/why-mot/clients/ (from www.minotech.co.uk/)
+11:24:41	Warning: 	Retry after error 500 (Internal Server Error) at link www.minotech.co.uk/why-mot/partners/ (from www.minotech.co.uk/why-mot/)
+11:26:53	Warning: 	Moved Permanently for www.minotech.co.uk/developers/
+11:26:53	Warning: 	File has moved from www.minotech.co.uk/developers/ to /development/
+11:27:51	Warning: 	Retry after error 500 (Internal Server Error) at link www.minotech.co.uk/why-mot/clients/ (from www.minotech.co.uk/)
+11:28:59	Warning: 	Retry after error 500 (Internal Server Error) at link www.minotech.co.uk/why-mot/partners/ (from www.minotech.co.uk/why-mot/)
+11:30:49	Error: 	"Internal Server Error" (500) after 2 retries at link www.minotech.co.uk/why-mot/clients/ (from www.minotech.co.uk/)
+11:30:49	Error: 	"Internal Server Error" (500) after 2 retries at link www.minotech.co.uk/why-mot/partners/ (from www.minotech.co.uk/why-mot/)
+11:31:08	Error: 	"Not Found" (404) at link www.minotech.co.uk/development/reflection-helper/ (from www.minotech.co.uk/development/open-source-projects/compositions)
+11:31:08	Error: 	"Not Found" (404) at link www.minotech.co.uk/development/fluent-guard (from www.minotech.co.uk/development/open-source-projects/reflection-helper)
+11:31:28	Warning: 	HTML file (13570 bytes) retransferred due to lack of cache: www.minotech.co.uk/why-mot/partners/
+11:31:29	Warning: 	Retry after error 500 (Internal Server Error) at link www.minotech.co.uk/why-mot/partners/ (from www.minotech.co.uk/why-mot/)
+11:31:40	Warning: 	HTML file (13570 bytes) retransferred due to lack of cache: www.minotech.co.uk/why-mot/partners/
+11:31:41	Warning: 	HTML file (7281 bytes) retransferred due to lack of cache: www.minotech.co.uk/network/jen-jackson/
+11:33:11	Warning: 	Retry after error -4 (Incorrect length (2991504 Bytes, 5436446 expected)) at link www.minotech.co.uk/media/1103/img_20181223_153509-2.jpg (from www.minotech.co.uk/blog/)
+11:33:11	Warning: 	HTML file (14648 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/the-anti-agility-of-dogma-or-why-agile-is-a-science-and-not-a-faith/
+11:33:12	Warning: 	HTML file (16114 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/climate-change-mitigation-remote-working/
+11:33:14	Warning: 	HTML file (16459 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/what-is-a-pragmatic-agilist/
+11:33:16	Warning: 	HTML file (10240 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/meet-the-real-spike/
+11:33:31	Warning: 	Retry after error -4 (Incorrect length (2983312 Bytes, 4667736 expected)) at link www.minotech.co.uk/media/1093/spike.jpg (from www.minotech.co.uk/blog/)
+11:33:31	Warning: 	HTML file (13570 bytes) retransferred due to lack of cache: www.minotech.co.uk/why-mot/clients/
+11:33:33	Warning: 	Retry after error 500 (Internal Server Error) at link www.minotech.co.uk/why-mot/clients/ (from www.minotech.co.uk/)
+11:33:33	Warning: 	HTML file (11520 bytes) retransferred due to lack of cache: www.minotech.co.uk/services/remote-control
+11:33:33	Warning: 	HTML file (13570 bytes) retransferred due to lack of cache: www.minotech.co.uk/why-mot/clients/
+11:33:35	Warning: 	HTML file (15452 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/agile-cymru-or-to-cardiff-and-back-again/
+11:33:37	Warning: 	HTML file (14796 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/interviewing-for-scrum-masters/
+11:33:39	Warning: 	HTML file (16027 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/optimising-project-delivery-resourcing-empowered-teams/
+11:33:41	Warning: 	HTML file (13616 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/optimising-project-delivery-the-retrospective/
+11:33:43	Warning: 	HTML file (16545 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/optimising-project-delivery-the-importance-of-in-flow-qa/
+11:33:45	Warning: 	HTML file (13585 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/using-retrospective-feedback-to-inform-product-decisions/
+11:33:47	Warning: 	HTML file (15294 bytes) retransferred due to lack of cache: www.minotech.co.uk/development/blog/the-repository-pattern-keeping-it-clean/
+11:33:49	Warning: 	HTML file (12856 bytes) retransferred due to lack of cache: www.minotech.co.uk/development/blog/open-source-products-refreshed/
+11:33:51	Warning: 	HTML file (26080 bytes) retransferred due to lack of cache: www.minotech.co.uk/development/blog/migrating-umbraco-5-to-umbraco-411/
+11:33:53	Error: 	"Internal Server Error" (500) after 2 retries at link www.minotech.co.uk/why-mot/clients/ (from www.minotech.co.uk/)
+11:33:53	Error: 	"Internal Server Error" (500) after 2 retries at link www.minotech.co.uk/why-mot/partners/ (from www.minotech.co.uk/why-mot/)
+11:33:53	Warning: 	HTML file (13727 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/what-can-the-election-teach-me/
+11:33:55	Warning: 	HTML file (15530 bytes) retransferred due to lack of cache: www.minotech.co.uk/development/blog/reflectionhelper-reflection-for-the-rest-of-us/
+11:33:57	Warning: 	HTML file (15427 bytes) retransferred due to lack of cache: www.minotech.co.uk/development/open-source-projects/compositions
+11:33:59	Warning: 	HTML file (11051 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/why-pair-programming-works/
+11:34:01	Warning: 	HTML file (13145 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/building-a-great-team/
+11:34:03	Warning: 	HTML file (11690 bytes) retransferred due to lack of cache: www.minotech.co.uk/blog/documentation-in-agile-software-development/
+11:34:05	Warning: 	HTML file (13570 bytes) retransferred due to lack of cache: www.minotech.co.uk/why-mot/partners/
+11:34:07	Warning: 	Retry after error 500 (Internal Server Error) at link www.minotech.co.uk/why-mot/partners/ (from www.minotech.co.uk/why-mot/)
+11:34:07	Warning: 	HTML file (13570 bytes) retransferred due to lack of cache: www.minotech.co.uk/why-mot/partners/
+11:34:07	Error: 	"Not Found" (404) at link sodipodi.sourceforge.net/DTD/sodipodi-0.dtd (from www.minotech.co.uk/images/ministry/services/mot-concept.svg?v=7.1.0.25803)
+11:37:36	Warning: 	Retry after error -4 (Incorrect length (4152943 Bytes, 5436446 expected)) at link www.minotech.co.uk/media/1103/img_20181223_153509-2.jpg (from www.minotech.co.uk/blog/)
+11:37:55	Warning: 	Retry after error -4 (Incorrect length (4079215 Bytes, 4667736 expected)) at link www.minotech.co.uk/media/1093/spike.jpg (from www.minotech.co.uk/blog/)
+11:37:55	Warning: 	HTML file (13570 bytes) retransferred due to lack of cache: www.minotech.co.uk/why-mot/clients/
+11:37:57	Error: 	"Internal Server Error" (500) after 2 retries at link www.minotech.co.uk/why-mot/clients/ (from www.minotech.co.uk/)
+11:37:57	Error: 	"Internal Server Error" (500) after 2 retries at link www.minotech.co.uk/why-mot/partners/ (from www.minotech.co.uk/why-mot/)
+11:41:47	Error: 	"Incorrect length (5424038 Bytes, 5436446 expected)" (-4) after 2 retries at link www.minotech.co.uk/media/1103/img_20181223_153509-2.jpg (from www.minotech.co.uk/blog/)
+
+HTTrack Website Copier/3.49-2 mirror complete in 19 minutes 44 seconds : 218 links scanned, 257 files written (17540243 bytes overall) [16606523 bytes received at 14025 bytes/sec], 2381304 bytes transferred using HTTP compression in 141 files, ratio 35%
+(10 errors, 41 warnings, 0 messages)

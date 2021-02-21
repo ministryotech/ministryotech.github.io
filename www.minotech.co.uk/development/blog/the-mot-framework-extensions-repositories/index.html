@@ -1,0 +1,196 @@
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from www.minotech.co.uk/development/blog/the-mot-framework-extensions-repositories/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:31:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <script>
+        // Pure JavaScript 'JS enabled' hook for styling
+        var _ = document.getElementsByTagName('html')[0];
+        _.className = _.className.replace(/(?:^|\s)no-js(?!\S)/g, 'js');
+    </script>
+
+    <meta charset="utf-8" />
+    <title>The MOT Framework Extensions – Repositories - The Ministry of Technology</title>
+    <meta name="description" content="Holistic Technical Counsel - Agile Software Development & Management with a difference" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../images/ministry/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/ministry/apple-touch-icon-114x114-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/ministry/apple-touch-icon-72x72-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" href="../../../images/ministry/apple-touch-icon-precomposed9078.png?v=7.1.0.25803" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../css/development-style.min91af.css?v=7.1.0.25813" />
+    <!-- References -->
+    <link rel="author" href="../../../humans.txt" />
+
+    <!-- Scripts to execute before page load begins -->
+    <script src="../../../../use.typekit.net/sha1jar.js"></script>
+    <script>try { Typekit.load(); } catch (e) { }</script>
+</head>
+<body class="dev-body">
+    <div class="wide-bg">
+        <img src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="" />
+    </div>
+    <div class="outer">
+        <header>
+            <a href="../../../developers/index.html" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
+            <!--[if IE]><p>This site is optimised for HTML5 and CSS3 and is not supported by IE9 or lower. <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->
+<i class="menu-button fa fa-bars"></i>
+<nav id="js-nav" class="bp-wide">
+    <ul>
+                <li><a href="../../../index.html">Home</a></li>                <li><a href="../../index.html">Development</a></li>                <li><a href="../../mentoring/index.html">Mentoring</a></li>                <li><a class="selected" href="../index.html">Blog</a></li>                <li><a href="../../open-source-projects/index.html">Open Source</a></li>                <li><a href="../../../contact/index.html">Contact</a></li>    </ul>
+</nav>        </header>
+        <!--[if gt IE 9]><!-->
+        <div class="inner">
+            <section class="page-title-or-logo">
+                    <h1> The MOT Framework Extensions – Repositories </h1>
+                                    <section class="subdata">
+                        
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 25/04/2011</span>
+    
+                    </section>
+            </section>
+            <img class="mobile-fold" src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="Show Menu" />
+            <div class="block-container ">
+                    <section class="element-block element-block--intro element-block--title">
+                        <div class="element-block__content">
+                            <h1> The MOT Framework Extensions – Repositories </h1>
+                                <section class="subdata">
+                                    
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 25/04/2011</span>
+    
+                                </section>
+                        </div>
+                    </section>
+                
+
+
+
+<div class="main-strip">
+    <section class="element-block element-block--main">
+        <article class="element-block__content">
+    <p>Following my earlier article on the Repository pattern I began looking at ways to come up with some useful interfaces and base implementations within the MOT Framework Extensions project to highlight the concepts that I was trying to convey. In my initial article I used theoretical examples that I was using in a trial project. What I'll do now is show you the boilerplate code you can use to make these kinds of implementations easier. <em>[edited - A more up to date variation on this code can be implemented automatically now on Entity Framework using the RepoLayer project on <a rel="noopener" href="https://bitbucket.org/ministryotech/repolayer" target="_blank">Bitbucket</a>.]</em></p>
+<h2>Interfaces</h2>
+<p>The strategy consists of several interfaces...</p>
+<h3>IRepository</h3>
+<p>This is the root of the repository interfaces and is quite generic, exposing only a Get and GetAll method type. The generic parameters required are for the type of object to be provided and the Type of the ID for that object.</p>
+<pre>public interface IRepository&lt;T, TKey&gt;<br />{<br />  T GetById(TKey id);<br />  List&lt;T&gt; GetAll();<br />}</pre>
+<h3>IRepositoryWithCreate</h3>
+<p>An extension of the IRepository interface, a Repository implementing this interface will also specify methods to create new objects of the type managed by it.</p>
+<pre>public interface IRepositoryWithCreate&lt;T, TKey&gt; : IRepository&lt;T, TKey&gt;<br />{<br />  void Create(T item);<br />}</pre>
+<h3>IRepositoryWithDelete</h3>
+<p>An extension of the IRepository interface, a Repository implementing this interface will also specify methods to delete existing objects of the type managed by it.</p>
+<pre><span class="code">public interface IRepositoryWithDelete&lt;T, TKey&gt; : IRepository&lt;T, TKey&gt;<br />{<br />  void Delete(T item);<br />}</span></pre>
+<h3>ICrudRepository</h3>
+<p>The highest level of the IRepository interface hierarchy, an ICrudRepository combines the function of both an IRepositoryWithCreate and IRepositoryWithDelete. It has no additional requirements.</p>
+<pre>public interface ICrudRepository&lt;T, TKey&gt; : IRepositoryWithCreate&lt;T, TKey&gt;, IRepositoryWithDelete&lt;T, TKey&gt;<br />{<br />}</pre>
+<p>Now, this is a very simple interface hierarchy tree and doesn't achieve a great deal on it's own, but this is to allow the interface implementation to take on any form that is required (in fact I have used this interface structure in a variety of slightly altered ways for many years using very different data access techniques to good effect. The following interfaces will become less generic.</p>
+<h3>IDataSourceGateway</h3>
+<p><strong>NOTE:</strong> This interface will be renamed to IQueryableDataSourceGateway<br />Designed with Linq in mind, this interface is the exposition of the actual access methods used by Linq on a Table; exposing the required methods to perform basic CRUD operations and access the table data. This may not be relevant for different ORM solutions, but the IRepository interfaces, above probably are. The required methods in the Interface signature should be familiar to anyone familiar with Linq.</p>
+<pre>public interface IDataSourceGateway<br />{<br />  IQueryable DataSource { get; }<br />  ConflictMode ConflictMode { get; set; }<br />  void DeleteOnSubmit(T item);<br />  void InsertOnSubmit(T item);<br />  void SubmitChanges();<br />}</pre>
+<h3>IIdentifiable</h3>
+<p>This interface is designed to represent an object that has an identity and allow that ID to be queried (C# Generics limitations prevent simple equality checking against a generic type); The use of implementing this interface will become clear when looking at the base classes, below...</p>
+<pre><span class="code">public interface IIdentifiable&lt;TKey&gt;<br />{<br />  TKey Id { get; }<br />  bool MatchesId(TKey id);<br />}</span></pre>
+<h2>The Base Classes</h2>
+<p>In addition to the Interfaces above, I have also added a couple of base classes to highlight the pattern's usage in a Linq to SQL scenario. These should highlight bringing these Interfaces together. As with the DataSourceGateway above, these are largely Linq specific, but there's no reason that the principles cannot be applied to other methods.</p>
+<h3>QueryableRepositoryBase</h3>
+<p><strong>NOTE:</strong> This class will probably cease to be abstract and will therefore be renamed to QueryableRepository.<br />This is an abstract class using the interface above to provide a basic repository using Linq. For a basic read only object set, simply inheriting from this class and specifying the correct type parameters will give you a functioning repository.</p>
+<pre>public abstract class QueryableRepositoryBase&lt;T, TKey&gt; : IRepository&lt;T, TKey&gt;<br />where T : IIdentifiable&lt;TKey&gt;<br />{<br />  protected IDataSourceGateway&lt;T&gt; ObjectDataSourceGateway { get; private set; }<br /><br />  protected QueryableRepositoryBase(IDataSourceGateway&lt;T&gt; objectDataSourceGateway)<br />  {<br />    this.ObjectDataSourceGateway = objectDataSourceGateway;<br />  }<br /><br />  public T GetById(TKey id)<br />  {<br />    return ObjectDataSourceGateway.DataSource.Where(x =&gt; x.MatchesId(id)).First();<br />  }<br /><br />  public List&lt;T&gt; GetAll()<br />  {<br />    return new List&lt;T&gt;(ObjectDataSourceGateway.DataSource);<br />  }<br />}</pre>
+<h3>QueryableCrudRepositoryBase</h3>
+<p><strong>NOTE:</strong> This class will probably cease to be abstract and will therefore be renamed to QueryableCrudRepository.<br />Inheriting from QueryableRepositoryBase, this abstract class extends it's base by adding methods to allow creation and deletion of the associated object. As before, in a simple scenario, inheriting this class and supplying the relevant type parameters provides a fully functional repository.</p>
+<pre>public abstract class QueryableCrudRepositoryBase&lt;T, TKey&gt; : QueryableRepositoryBase&lt;T, TKey&gt;, ICrudRepository&lt;T, TKey&gt;<br />where T : class, IIdentifiable&lt;TKey&gt;<br />{<br />  protected QueryableCrudRepositoryBase(IDataSourceGateway&lt;T&gt; objectDataSourceGateway)<br />  : base (objectDataSourceGateway)<br />  { }<br /><br />  public void Create(T item)<br />  {<br />    ObjectDataSourceGateway.InsertOnSubmit(item);<br />    ObjectDataSourceGateway.SubmitChanges();<br />  }<br /><br />  public void Delete(T item)<br />  {<br />    ObjectDataSourceGateway.DeleteOnSubmit(item);<br />    ObjectDataSourceGateway.SubmitChanges();<br />  }<br />}</pre>
+<p>As you can see by the notes throughout, this is still very much a work in progress so any enhancements or additions you may have would be most welcome. I intend to look at how this relates to the Entity Framework for the next release of the Framework (after I get the first beta out the door). If you have any ideas yourselves on how these strategies can be applied with different ORMs I'd love to hear from you and see some code.</p>
+</article>
+        <footer class="element-block__footer">
+                <a href="../the-repository-pattern-keeping-it-clean/index.html">
+        <i class="pre-icon fa fa-arrow-left"></i>
+        <span class="element-block__footer__link-text">Previous Article</span>
+    </a>
+    <a href="../ui-automation-for-net/index.html">
+        <i class="post-icon fa fa-arrow-right"></i>
+        <span class="element-block__footer__link-text element-block__footer__link-text--right">Next Article</span>
+    </a>
+
+        </footer>
+    </section>
+    <section class="element-block element-block--main">
+        <div id="disqus_thread" class="element-block__content element-block__content--no-footer"></div>
+    </section>
+</div>
+<nav class="sidebar sidebar--articles-selector">
+            <h1><i class="pre-icon fa fa-file-text"></i> <a href="../index.html">Latest Entries</a></h1>
+    <ul>
+                <li><a href="../the-pylon-is-live/index.html">The Pylon is Live</a></li>
+                <li><a href="../umbraco-published-content-seems-wrong/index.html">Umbraco Published Content seems wrong</a></li>
+                <li><a href="../open-source-products-refreshed/index.html">Open Source Products - Refreshed</a></li>
+                <li><a href="../testing-web-api-routes-with-ministry-open-source/index.html">Testing Web API Routes with Ministry Open Source</a></li>
+                <li><a href="../azure-umbraco-friends-at-last/index.html">Azure &amp; Umbraco - Friends at Last?</a></li>
+                <li><a href="../entity-framework-repositories-now-on-nuget/index.html">Entity Framework Repositories - now on nuget</a></li>
+                <li><a href="../azure-not-a-lean-solution/index.html">Azure - Not a lean solution</a></li>
+                <li><a href="../migrating-umbraco-5-to-umbraco-411/index.html">Migrating Umbraco 5 to Umbraco 4.11</a></li>
+                <li><a href="../testing-mvc-routes-with-ministry-open-source/index.html">Testing MVC Routes with Ministry Open Source</a></li>
+                <li><a href="../detecting-touch-devices/index.html">Detecting Touch Devices</a></li>
+
+    </ul>
+
+</nav>
+<script type="text/javascript">
+    var disqus_identifier = 'www.minotech.co.uk-article-1098';
+    var disqus_title = 'The MOT Framework Extensions – Repositories';
+    var disqus_url = 'index.html';
+</script>
+
+            </div>
+        </div>
+        <footer class="brand-footer">
+            <div class="brand-footer__notes">
+                <p class="brand-footer__copyright"><i class="fa fa-copyright"></i> 2021 Keith Jackson (The Ministry of Technology)</p>
+                <p class="brand-footer__strapline">
+                    Pragmatic Agile Coaching & Consultancy, Software Development & Technical Architecture - Web, Cloud, Apps & Agile for
+                    an Alternative audience.
+                </p>
+                <p class="brand-footer__links">
+                    <a href="../../../elements/privacy-policy.html">Privacy Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/cookies-policy.html">Cookies Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/terms-and-conditions.html">Terms & Conditions</a>
+                </p>
+            </div>
+            <aside class="brand-footer__logos">
+                <section class="logos">
+    <div class="logos__social">
+        <a href="https://www.linkedin.com/company/the-ministry-of-technology/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--linkedin fa fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/ministryotech" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--twitter fa fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/agilerodent/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--instagram fa fa-instagram"></i>
+        </a>
+    </div>
+</section>
+            </aside>
+        </footer>
+        <!--<![endif]-->
+        <div class="clear"></div>
+    </div>
+    <script src="../../../js/head-1.0.3.min.js"></script>
+    <script>
+        head.js(
+'../../../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+'../../../js/ministry.min91af.js?v=7.1.0.25813',
+'../../../js/analytics91af.js?v=7.1.0.25813'
+);
+
+    </script>
+</body>
+
+<!-- Mirrored from www.minotech.co.uk/development/blog/the-mot-framework-extensions-repositories/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:31:03 GMT -->
+</html>

@@ -1,0 +1,287 @@
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from www.minotech.co.uk/development/open-source-projects/compositions/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <script>
+        // Pure JavaScript 'JS enabled' hook for styling
+        var _ = document.getElementsByTagName('html')[0];
+        _.className = _.className.replace(/(?:^|\s)no-js(?!\S)/g, 'js');
+    </script>
+
+    <meta charset="utf-8" />
+    <title>Compositions - The Ministry of Technology</title>
+    <meta name="description" content="Holistic Technical Counsel - Agile Software Development & Management with a difference" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../images/ministry/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/ministry/apple-touch-icon-114x114-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/ministry/apple-touch-icon-72x72-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" href="../../../images/ministry/apple-touch-icon-precomposed9078.png?v=7.1.0.25803" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../css/development-style.min91af.css?v=7.1.0.25813" />
+    <!-- References -->
+    <link rel="author" href="../../../humans.txt" />
+
+    <!-- Scripts to execute before page load begins -->
+    <script src="../../../../use.typekit.net/sha1jar.js"></script>
+    <script>try { Typekit.load(); } catch (e) { }</script>
+</head>
+<body class="dev-body">
+    <div class="wide-bg">
+        <img src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="" />
+    </div>
+    <div class="outer">
+        <header>
+            <a href="../../../developers/index.html" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
+            <!--[if IE]><p>This site is optimised for HTML5 and CSS3 and is not supported by IE9 or lower. <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->
+<i class="menu-button fa fa-bars"></i>
+<nav id="js-nav" class="bp-wide">
+    <ul>
+                <li><a href="../../../index.html">Home</a></li>                <li><a href="../../index.html">Development</a></li>                <li><a href="../../mentoring/index.html">Mentoring</a></li>                <li><a href="../../blog/index.html">Blog</a></li>                <li><a class="selected" href="../index.html">Open Source</a></li>                <li><a href="../../../contact/index.html">Contact</a></li>    </ul>
+</nav>        </header>
+        <!--[if gt IE 9]><!-->
+        <div class="inner">
+            <section class="page-title-or-logo">
+                    <h1> Compositions </h1>
+                            </section>
+            <img class="mobile-fold" src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="Show Menu" />
+            <div class="block-container  project-page ">
+                    <section class="element-block element-block--intro element-block--title">
+                        <div class="element-block__content">
+                            <h1> Compositions </h1>
+                        </div>
+                    </section>
+                
+
+
+<div class="main-strip">
+    <section class="element-block element-block--main">
+        <div class="element-block__linked-head-image element-block__linked-head-image--align-wider-right">
+            <img src="../../../images/development/oss.jpg" alt="Compositions" />
+        </div>
+        <div class="element-block__content">
+            <div class="info">
+                
+                <span class="involvement">Created by Ministry</span>
+                <dl>
+                    <dt>Language</dt>
+                    <dd>.net Framework 4.5+ / .net Standard 1.6 / C#</dd>
+                    <dt>Type</dt>
+                    <dd>Database, Library</dd>
+                </dl>
+            </div>
+            <p>This project provides a suite of extension methods that enable fluent, functional style coding when manipulating objects.</p>
+
+<p>It is dependent on the <a href="../reflection-helper/index.html">Reflection Helper</a> project.</p>
+
+<h1>Methods</h1>
+
+<p><strong>NOTE:</strong> Where the notation 'For EF' is shown, these methods have specific, or additional, use within Entity Framework Core.</p>
+
+<h2>Collection Compositions</h2>
+
+<h3>ICollection.AddItem()</h3>
+
+<p>Adds the given new object to a collection and returns the collection. To be used as a preferred form to traditional collection Add when chaining is necessary or when updating an EF object tree.</p>
+
+<p><strong>FOR EF:</strong> Usage of this method ensures object trees are populated in the correct order for persistence of IDs.</p>
+
+<h3>ICollection.AddItems()</h3>
+
+<p>Adds the given new collection to a collection and returns the collection. To be used as a preferred form to traditional collection Add when chaining is necessary or when updating an EF object tree.</p>
+
+<p><strong>FOR EF:</strong> Usage of this method ensures object trees are populated in the correct order for persistence of IDs.</p>
+
+<h3>ICollection.AddItemsIf()</h3>
+
+<p>Adds the given new collection, evaluating each item against a given predicate, to a collection and returns the collection. Allows adding collections conditionally, for example, removing duplicates.</p>
+
+<h3>object.AddItemsToIf() / object.AddItemsToIfAsync()</h3>
+
+<p>Adds the given new collection, evaluating each item against a given predicate, to the specified collection property and returns the parent object. Allows adding collections conditionally, for example, removing duplicates.</p>
+
+<h3>object.AddAndReturnItem()</h3>
+
+<p>Adds the given new object to a collection and returns the object that was added. To be used as a preferred form to traditional collection Add when chaining is necessary or when updating an EF object tree.</p>
+
+<p><strong>FOR EF:</strong> Usage of this method ensures object trees are populated in the correct order for persistence of IDs.</p>
+
+<h3>ICollection.RemoveItem()</h3>
+
+<p>Removes the given new object from a collection and returns the collection. To be used as a preferred form to traditional collection Add when chaining is necessary or when updating an EF object tree.</p>
+
+<p><strong>FOR EF:</strong> Usage of this method ensures object trees are populated in the correct order for persistence of IDs.</p>
+
+<h3>ICollection.RemoveItemIf()</h3>
+
+<p>Evaluates each item in a collection against a given predicate, removes the offending items, then returns the collection. Allows removing items from collections conditionally, for example, removing duplicates.</p>
+
+<h2>Object Compositions</h2>
+
+<h3>object.Compose() / object.ComposeAsync()</h3>
+
+<p>Enables functional composition of a method, enabling chaining. Currently methods with up to 3 parameters are supported. Feel free to form an update to add more parameters - these updates would be most welcome.</p>
+
+<h3>object.SetProperty() / object.SetPropertyAsync()</h3>
+
+<p>Sets the specified navigation property value on an object to enable chaining and to ensure that the object tree is built in the right order, returning the object.</p>
+
+<h3>object.SetAndReturnProperty() / object.SetAndReturnPropertyAsync()</h3>
+
+<p>Sets the specified navigation property value on an object to enable chaining and to ensure that the object tree is built in the right order, returning the object property value.</p>
+
+<h2>Collection Mutations</h2>
+
+<p>These are void return methods.</p>
+
+<h3>ICollection.AddRange()</h3>
+
+<p>Adds the provided collection to the existing collection.</p>
+
+<h3>ICollection.ForEach()</h3>
+
+<p>A fluent version of the for eanch loop.</p>
+
+<h2>Projections</h2>
+
+<h3>object.Project(object)</h3>
+
+<p>Projects all property values from the input object on the passed in target object, if they are present in both. This is a really simple way of mapping matching data between types. If choosing to persist existing values please note that, due to it's binary nature, boolean values will not persist and must be re-set. Returns the output object.</p>
+
+<h3>object.Project(Func)</h3>
+
+<p>Uses the provided function to project one type into another type. Returns the output object.</p>
+
+<h3>object.Project(Func, Accumulator)</h3>
+
+<p>Uses the provided function to project one type into another type and increments an accumulator. Returns the output object.</p>
+
+<h3>IList.Partition()</h3>
+
+<p>Partitions the specified list into blocks of the provided size.</p>
+
+<h3>IEnumerable.Select()</h3>
+
+<p>Various additional overloads for Select. Maps the specified predicate to project each instance of one type in the collection into another type using an accumulator to build value increments for the mapping.</p>
+
+<h3>IEnumerable.Flatten()</h3>
+
+<p>Flattens a collection of collections down to a single collection.</p>
+
+<h3>IEnumerable.Sorted</h3>
+
+<p>Sorts the specified collection according to the comparison provided.</p>
+        </div>
+        <a class="element-block__footer-link-wrapper" href="http://github.com/ministryotech" target="_blank">
+            <footer class="element-block__footer">
+                <i class="pre-icon fa fa-github-square"></i>
+                <span class="element-block__footer__link-text">Visit us on GitHub</span>
+                <i class="post-icon fa fa-external-link"></i>
+            </footer>
+        </a>
+    </section>
+<section class="element-block element-block--main">
+    <div id="disqus_thread" class="element-block__content element-block__content--no-footer"></div>
+</section>
+</div>
+<nav class="sidebar sidebar--external-project-links">
+    <dl>
+                <dd class="ungrouped">
+                    <i class="pre-icon fa fa-github"></i><a href="https://github.com/ministryotech/compositions" target="_blank">View on GitHub</a>
+                    <i class="post-icon fa fa-external-link"></i>
+                </dd>
+                <dd class="ungrouped">
+                    <i class="pre-icon fa fa-cog"></i><a href="https://www.nuget.org/packages/Ministry.Compositions" target="_blank">Install from NuGet</a>
+                    <i class="post-icon fa fa-external-link"></i>
+                </dd>
+    </dl>
+</nav>
+<nav class="sidebar sidebar--services-selector">
+    <h1><i class="pre-icon fa fa-code-fork"></i> <a href="../index.html">Open Source</a></h1>
+    <ul>
+            <li><a class="" href="../api-security/index.html">API Security</a></li>
+            <li><a class="" href="../argument-guard/index.html">Argument Guard</a></li>
+            <li><a class="" href="../backbone-ribs/index.html">Backbone Ribs</a></li>
+            <li><a class="" href="../client-mvc/index.html">Client MVC</a></li>
+            <li><a class="selected" href="index.html">Compositions</a></li>
+            <li><a class="" href="../csv/index.html">CSV</a></li>
+            <li><a class="" href="../date-time-abstractions/index.html">Date Time Abstractions</a></li>
+            <li><a class="" href="../entity-framework-repolayer/index.html">Entity Framework RepoLayer</a></li>
+            <li><a class="" href="../fluent-guard/index.html">Fluent Guard</a></li>
+            <li><a class="" href="../iis-multi-host-redirector/index.html">IIS Multi-Host Redirector</a></li>
+            <li><a class="" href="../javascript-on-load-function-stack/index.html">JavaScript On Load Function Stack</a></li>
+            <li><a class="" href="../model-builder-abstractions/index.html">Model Builder Abstractions</a></li>
+            <li><a class="" href="../reflection-helper/index.html">Reflection Helper</a></li>
+            <li><a class="" href="../responsive-mq/index.html">Responsive MQ</a></li>
+            <li><a class="" href="../simple-twitter-stream/index.html">Simple Twitter Stream</a></li>
+            <li><a class="" href="../strong-typed/index.html">Strong Typed</a></li>
+            <li><a class="" href="../test-support/index.html">Test Support</a></li>
+            <li><a class="" href="../umbraco-pylon/index.html">Umbraco Pylon</a></li>
+            <li><a class="" href="../uri-path-manager/index.html">URI Path Manager</a></li>
+            <li><a class="" href="../url-navigator/index.html">URL Navigator</a></li>
+            <li><a class="" href="../web-theming/index.html">Web Theming</a></li>
+            <li><a class="" href="../webdriver-extensions/index.html">WebDriver Extensions</a></li>
+            <li><a class="" href="../window-wrapper/index.html">Window Wrapper</a></li>
+    </ul>
+</nav>
+<script type="text/javascript">
+    var disqus_identifier = 'www.minotech.co.uk-article-4464';
+    var disqus_title = 'Compositions';
+    var disqus_url = 'index.html';
+</script>
+
+            </div>
+        </div>
+        <footer class="brand-footer">
+            <div class="brand-footer__notes">
+                <p class="brand-footer__copyright"><i class="fa fa-copyright"></i> 2021 Keith Jackson (The Ministry of Technology)</p>
+                <p class="brand-footer__strapline">
+                    Pragmatic Agile Coaching & Consultancy, Software Development & Technical Architecture - Web, Cloud, Apps & Agile for
+                    an Alternative audience.
+                </p>
+                <p class="brand-footer__links">
+                    <a href="../../../elements/privacy-policy.html">Privacy Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/cookies-policy.html">Cookies Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/terms-and-conditions.html">Terms & Conditions</a>
+                </p>
+            </div>
+            <aside class="brand-footer__logos">
+                <section class="logos">
+    <div class="logos__social">
+        <a href="https://www.linkedin.com/company/the-ministry-of-technology/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--linkedin fa fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/ministryotech" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--twitter fa fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/agilerodent/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--instagram fa fa-instagram"></i>
+        </a>
+    </div>
+</section>
+            </aside>
+        </footer>
+        <!--<![endif]-->
+        <div class="clear"></div>
+    </div>
+    <script src="../../../js/head-1.0.3.min.js"></script>
+    <script>
+        head.js(
+'../../../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+'../../../js/ministry.min91af.js?v=7.1.0.25813',
+'../../../js/analytics91af.js?v=7.1.0.25813'
+);
+
+    </script>
+</body>
+
+<!-- Mirrored from www.minotech.co.uk/development/open-source-projects/compositions/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:45 GMT -->
+</html>

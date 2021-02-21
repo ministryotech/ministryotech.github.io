@@ -1,0 +1,512 @@
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from www.minotech.co.uk/development/open-source-projects/backbone-ribs/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <script>
+        // Pure JavaScript 'JS enabled' hook for styling
+        var _ = document.getElementsByTagName('html')[0];
+        _.className = _.className.replace(/(?:^|\s)no-js(?!\S)/g, 'js');
+    </script>
+
+    <meta charset="utf-8" />
+    <title>Backbone Ribs - The Ministry of Technology</title>
+    <meta name="description" content="Holistic Technical Counsel - Agile Software Development & Management with a difference" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../images/ministry/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/ministry/apple-touch-icon-114x114-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/ministry/apple-touch-icon-72x72-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" href="../../../images/ministry/apple-touch-icon-precomposed9078.png?v=7.1.0.25803" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../../../../maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../css/development-style.min91af.css?v=7.1.0.25813" />
+    <!-- References -->
+    <link rel="author" href="../../../humans.txt" />
+
+    <!-- Scripts to execute before page load begins -->
+    <script src="../../../../use.typekit.net/sha1jar.js"></script>
+    <script>try { Typekit.load(); } catch (e) { }</script>
+</head>
+<body class="dev-body">
+    <div class="wide-bg">
+        <img src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="" />
+    </div>
+    <div class="outer">
+        <header>
+            <a href="../../../developers/index.html" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
+            <!--[if IE]><p>This site is optimised for HTML5 and CSS3 and is not supported by IE9 or lower. <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->
+<i class="menu-button fa fa-bars"></i>
+<nav id="js-nav" class="bp-wide">
+    <ul>
+                <li><a href="../../../index.html">Home</a></li>                <li><a href="../../index.html">Development</a></li>                <li><a href="../../mentoring/index.html">Mentoring</a></li>                <li><a href="../../blog/index.html">Blog</a></li>                <li><a class="selected" href="../index.html">Open Source</a></li>                <li><a href="../../../contact/index.html">Contact</a></li>    </ul>
+</nav>        </header>
+        <!--[if gt IE 9]><!-->
+        <div class="inner">
+            <section class="page-title-or-logo">
+                    <h1> Backbone Ribs </h1>
+                            </section>
+            <img class="mobile-fold" src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="Show Menu" />
+            <div class="block-container  project-page ">
+                    <section class="element-block element-block--intro element-block--title">
+                        <div class="element-block__content">
+                            <h1> Backbone Ribs </h1>
+                        </div>
+                    </section>
+                
+
+
+<div class="main-strip">
+    <section class="element-block element-block--main">
+        <div class="element-block__linked-head-image element-block__linked-head-image--align-wider-right">
+            <img src="../../../images/development/oss.jpg" alt="Backbone Ribs" />
+        </div>
+        <div class="element-block__content">
+            <div class="info">
+                
+                <span class="involvement">Created by Ministry</span>
+                <dl>
+                    <dt>Language</dt>
+                    <dd>JavaScript (ES5)</dd>
+                    <dt>Type</dt>
+                    <dd>Web</dd>
+                </dl>
+            </div>
+            <p>Backbone Ribs is an extension project which adds an additional layer of functionality to Backbone that simplifies creation of basic types of views, adds more granular JSON handling and separates concerns further by separating Views from Regions (see Views and regions below for details) which enables proper garbage handling without having to roll it all yourself.</p>
+
+<h3>Common Extensions</h3>
+
+<p>Many of the Ribs versions of the core Backbone objects listed below are extended by implementing one or more of the following extensions.</p>
+
+<h4>Attribute Checker</h4>
+
+<p>The Attribute Checker extension is used to simplify attribute value checking. It offers methods to extend models and collections that allow for less verbose validation code to be written either for validation methods or when attributes are required to be passed in on instantiation.</p>
+
+<p>For example, when checking attribute values in your model rather than writing this in traditional Backbone...</p>
+
+<pre><code>if (attributes === undefined || attributes === null || attributes.myAttr === undefined || attributes.myAttr === null) {
+    throw new Error('The myAttr attribute is required.')
+};
+</code></pre>
+
+<p>... you can now write this instead...</p>
+
+<pre><code>if (this.isNullAttribute(attributes, 'myAttr')) {
+    throw new Error('The myAttr attribute is required.')
+};
+</code></pre>
+
+<p>The attribute checker exposes the following methods within any of the Objects that are extended by it...</p>
+
+<ul>
+<li>isNullAttribute()</li>
+<li>isNullOrEmptyAttribute()</li>
+<li>isNullOrFalseAttribute()</li>
+</ul>
+
+<h4>JSON Formatter</h4>
+
+<p>The traditional toJSON() method is limited to transforming the current object. Overriding the toJSON() method itself is generally not a good idea as some Backbone structures can become infinitely nested, although in some cases you want to convert nested Backbone objects to pure JSON for template rendering, for example. The JSON Formatter exposes a single 'toJSONRecursive()' function to recursively convert models and collections to raw JSON.</p>
+
+<p>The function takes an optional 'level' parameter which indicates how far down the object hierarchy to look for data to transform. This can be as high as you like without falling over, but it's recommended to keep this level value right for the expected data structure, as checking for the presence of additional levels requires additional processing loops.</p>
+
+<p>If no level parameter is provided then the first level of children are processed by default. The level relates to the initial Model structure, so the collection itself constitutes a level.</p>
+
+<h3>Core Ribs Objects</h3>
+
+<p>Ribs currently exposes the following primary objects from Backbone object in an extended form...</p>
+
+<h4>Ribs.Model</h4>
+
+<p>Any class extending Ribs.Model should ensure to call the replaced methods as follows...</p>
+
+<pre><code>Ribs.Model.prototype.initialize.call(this, attributes, options);
+</code></pre>
+
+<p>Every Ribs based model has a name to help identify it. The name can be passed in as an option to the constructor and will be stored within the model object or can be specified when defining the child class. A Ribs model applies a default validity check that will log any validation errors to the console and throw them up the tree for handling as needed.</p>
+
+<p>EVENTS:</p>
+
+<ul>
+<li>'fetching': Triggered whenever any model's fetch method has started.</li>
+</ul>
+
+<p>IMPLEMENTS:</p>
+
+<ul>
+<li>Attribute Checker: Adds the functionality of the extension to allow quick method calls to check the null / undefined state of attributes - allows far more concise validation code.</li>
+<li>JSON Formatter: Adds functionality to support recursive JSON transformations of model / collection hierarchies.</li>
+</ul>
+
+<h4>Ribs.Collection</h4>
+
+<p>Any class extending Ribs.Collection should ensure to call the replaced methods as follows...</p>
+
+<pre><code>Ribs.Collection.prototype.initialize.call(this, attributes, options);
+</code></pre>
+
+<p>Every Ribs based collection has a name to help identify it. The name can be passed in as an option to the constructor and will be stored within the collection object or can be specified when defining the child class. A Ribs model applies a default validity check that will log any validation errors to the console and throw them up the tree for handling as needed.</p>
+
+<p>EVENTS:</p>
+
+<ul>
+<li>'fetching': Triggered whenever any collection's fetch method has started.</li>
+</ul>
+
+<p>IMPLEMENTS:</p>
+
+<ul>
+<li>Attribute Checker: Adds the functionality of the extension to allow quick method calls to check the null / undefined state of attributes - allows far more concise validation code.</li>
+<li>JSON Formatter: Adds functionality to support recursive JSON transformations of model / collection hierarchies.</li>
+</ul>
+
+<h4>Ribs.Region</h4>
+
+<p>Any class extending Ribs.Region should ensure to call the replaced methods as follows...</p>
+
+<pre><code>Ribs.Region.prototype.initialize.call(this, attributes, options);
+</code></pre>
+
+<p>Region implementations generally tend to be extremely lightweight, as the Backbone Ribs code here does most of what is required.</p>
+
+<p>Although Backbone allows much variation; best practice when using Ribs is to look at a 'View' as being responsible for itself in that it's a piece of contained markup that is NOT attached to anything on a page. In a Ribs based App containers on a page are wrapped by Regions instead and the regions are responsible for then rendering a view into the container that they represent. SO the basic rule is...</p>
+
+<ul>
+<li>Is it new markup? = View</li>
+<li>Is the markup a container that's already present in a page or generated by another view? = Region</li>
+</ul>
+
+<p>Every Ribs based region has a name to help identify it. The name can be passed in as an option to the constructor and will be stored within the region object or can be specified when defining the child class.</p>
+
+<p>Every Ribs based view has an optional sectionName to add to navigation if needed. The sectionName can be passed in as an option to the constructor and will be stored within the view object or can be specified when defining the child class.</p>
+
+<p>The 'spinner' property is expected to be replaced by an extending child class.</p>
+
+<p>EVENTS: A Ribs region binds to the 'rendered' and 'rendering' events of it's currentView object. This allows the region to seperate it's two key functions, firstly cleaning up any old views that may be contained within the region (see 'View Lifecycle' below) and then placing the rendered view into it's container once the 'rendered' event has  been triggered. While 'rendering' the view will show a spinner.</p>
+
+<p>VIEW LIFECYCLE: One of the biggest issues in Backbone revolves around the View lifecycle. Ribs views maintain their bindings and have specific methods to dispose all of the resources they use. A Ribs region will clear up any views it contains before allowing a new one to be attached, calling the 'trash' method on the view to clean up any used resources. It also has it's own trash method that will clear it's currentView and optionally dispose of itself.</p>
+
+<h4>Ribs.View</h4>
+
+<p>Any class extending Ribs.View should ensure to call the replaced methods as follows...</p>
+
+<pre><code>Ribs.View.prototype.initialize.call(this, attributes, options);
+</code></pre>
+
+<p>The exception to this is the 'render' method. Instead, any extending classes should ensure to trigger the 'rendered' and 'rendering' events during the render lifecycle to ensure thet region integration works as expected (see 'Ribs.Region', above).</p>
+
+<p>Every Ribs based view has a name to help identify it. The name can be passed in as an option to the constructor and will be stored within the view object or can be specified when defining the child class.</p>
+
+<p>Every Ribs based view has an optional sectionName to add to navigation if needed. The sectionName can be passed in as an option to the constructor and will be stored within the view object or can be specified when defining the child class.</p>
+
+<p>Every Ribs based view has a template to use for rendering. The template can be passed in as an option to the constructor and will be stored within the view object or can be specified when defining the child class.</p>
+
+<p>STATE MANAGEMENT: The 'stateRequired' flag allows the view to indicate whether it's rendering requires any state variables to be set before rendering can commence. The containing region can then utilise this information to asynchronously hold rendering until the state variables are loaded.</p>
+
+<p>RESPONSIVE DESIGN: The 'resetStyleState' method is a no-op that is designed to be wired in across the app to support any view level changes that need to be applied as a result of user change generating a responsive design change (such as a screen resize).</p>
+
+<p>EVENTS:</p>
+
+<ul>
+<li>'rendering': Although not specified on the base BackboneRibs.View class, this event should always be fired by any child class at the point that the render method is called IF the rendering process involves any async operations. If all operations are quick, and synchronous, the event is unnecessary.</li>
+<li>'rendered': This event should be triggered after all view rendering has completed. This is important, as it allows contaning master views (or 'regions' as they are called in Ribs parlance) to respond. This trigger may be attached to a success or error callback where data retrieval is required as part of the rendering process.</li>
+</ul>
+
+<p>VIEW LIFECYCLE: One of the biggest issues in Backbone revolves around the View lifecycle. Ribs views maintain their bindings and have specific methods to dispose all of the resources they use. When used in conjunction with a Ribs Region, to represent the holding area for the view, these methods ensure that 'orphan views' within a region are always removed when not used anymore preventing 'Zombies' and memory leaks. If you choose to use the views without the wrapping regions, then managing the Zombies falls to the consuming code, but the dispose and trash methods are still invaluable.</p>
+
+<p>BEST PRACTICE: Although Backbone allows much variation; best practice when using Ribs is to look at a 'View' as being responsible for itself in that it's a piece of contained markup that is NOT attached to anything on a page. In a Ribs based App containers on a page are wrapped by Regions instead and the regions are responsible for then rendering a view into the container that they represent. SO the basic rule is...</p>
+
+<ul>
+<li>Is it new markup? = View</li>
+<li>Is the markup a container that's already present in a page or generated by another view? = Region</li>
+</ul>
+
+<h4>Ribs.SimpleView</h4>
+
+<p>Any class extending Ribs.SimpleView should ensure to call the replaced methods as follows...</p>
+
+<pre><code>Ribs.SimpleView.prototype.initialize.call(this, attributes, options);
+</code></pre>
+
+<p>The exception to this is the 'render' method. Instead, any extending classes should ensure to trigger the 'rendered' and 'rendering' events during the render lifecycle to ensure thet region integration works as expected (see 'Ribs.Region', above).</p>
+
+<p>USAGE: Some views are very basic - They have a template and it's rendered. There's no data to worry about. The Ribs Simple view is for just those cases, where a simple extension or instantiation with a template is all that is needed.</p>
+
+<h4>Ribs.SecureView</h4>
+
+<p>Any class extending Ribs.SecureView should ensure to call the replaced methods as follows...</p>
+
+<pre><code>Ribs.SecureView.prototype.initialize.call(this, attributes, options);
+</code></pre>
+
+<p>The exception to this is the 'render' method. Instead, any extending classes should ensure to trigger the 'rendered' and 'rendering' events during the render lifecycle to ensure thet region integration works as expected (see 'Ribs.Region', above).</p>
+
+<p>It is recommended that the app developer creates an app specific version of this class and replaces the following default methods with app specific implementations...</p>
+
+<ul>
+<li>getLoggedInUserData() (Until this is done 'isSecured' will always fail).</li>
+<li>applySecureLoginPrompt()</li>
+<li>applyTimedOutSecureLoginPrompt()</li>
+</ul>
+
+<p>This could look something like this...</p>
+
+<pre><code>MyAppRibs.SecureView = window.Ribs.SecureView.extend({
+    initialize: function(options) {
+    window.Ribs.SecureView.prototype.initialize.call(this, options);
+    },
+
+    applySecureLoginPrompt: function() {
+    MyAppView.LoginScreen.render();
+    },
+
+    applyTimedOutSecureLoginPrompt: function() {
+    MyAppView.LoginScreen.render('Your session has timed out');
+    },
+
+    getLoggedInUserData: function() {
+    // Load data from a stored session cookie.
+    }
+});
+</code></pre>
+
+<p>Every SecureView has an optional flag to set that will bypass the secure elements. This is extremely useful when testing the general components of the view when you don't want to hit security walls. The flag can be passed in as an option to the constructor and will be stored within the view object.</p>
+
+<p>STATE MANAGEMENT: The default value of state requirement on a secured view is 'true'</p>
+
+<p>USAGE: The purpose of the SecureView is to secure the render method, redirecting to rendering the appropriate login elements when authentication is required. It requires that the 'applySecureLoginPrompt' method is replaced in any child classes (or through an extension).</p>
+
+<h3>Javascript Functional Extensions</h3>
+
+<p>As well as the core part of Ribs itself, the Ribs library also adds the following global Javascript helpers to aid in creating more terse, readable code...</p>
+
+<ul>
+<li>Object.hasValue - Returns true if the object is not undefined, null or empty</li>
+<li>Object.exists - Returns true if the object is not undefined or null</li>
+<li>Object.isTruthy - Returns true if the object is not undefined or null and is true</li>
+<li>Object.isFunction - Returns true if the object is not undefined or null and is a function</li>
+<li>String.trim() - Set up if not supported by the target browser</li>
+<li>String.ltrim() - Set up if not supported by the target browser</li>
+<li>String.rtrim() - Set up if not supported by the target browser</li>
+<li>String.fulltrim() - Set up if not supported by the target browser</li>
+<li>String.escapeRegExp() - Escape regular expressions</li>
+<li>String.replaceAll(find, replace) - Find and replace one value with another</li>
+</ul>
+
+<h3>How do I get set up?</h3>
+
+<p>Like Backbone itself, Ribs is designed to be used either traditionallly, exposing itself as a global scope object, or through an AMD pattern implemented by a product like RequireJS.</p>
+
+<h4>To set up as a Global scope object</h4>
+
+<p>Add a reference to Backbone and it's dependencies to your page as follows. Paths may vary, but the paths given here assume that the Backbone-Ribs reference was obtained from NPM...</p>
+
+<pre><code>&lt;script src="node_modules/backbone-ribs/node_modules/backbone/node_modules/underscore/underscore.js"&gt;&lt;/script&gt;
+&lt;script src="node_modules/backbone-ribs/node_modules/backbone/backbone.js"&gt;&lt;/script&gt;
+&lt;script src="node_modules/backbone-ribs/backbone-ribs.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<h4>To set up with RequireJS</h4>
+
+<p>With RequireJS in use you I use the following as a base RequireJS config (again assuming NPM paths)...</p>
+
+<pre><code>require.config({
+    baseUrl: "{insert your app base url here - commonly empty, app/ or scripts/}",
+    paths: {
+    jquery: "node_modules/jquery/dist/jquery",
+    underscore: "node_modules/backbone-ribs/node_modules/backbone/node_modules/underscore/underscore",
+    backbone: "node_modules/backbone-ribs/node_modules/backbone/backbone",
+    ribs: "node_modules/backbone-ribs/backbone-ribs"
+    },
+    shim: {
+    jquery: { exports: '$' },
+    underscore: { exports: '_' },
+    backbone: { deps: ['underscore', 'jquery'], exports: 'Backbone' },
+    ribs: { deps: ['backbone', 'underscore', 'jquery'], exports: 'Ribs' }
+    }
+});
+</code></pre>
+
+<h3>How do I use it?</h3>
+
+<p>My recommended usage pattern is to follow the same principle that Ribs itself follows and to create your own variation of ribs that extends the Ribs object elements themselves. This allows for integration of Ribs or Backbone updates while minimising the potential for breaking your code but allows you to slip in your own variations into the model for your own app.</p>
+
+<p>In a global scope object style a sample extended version of Ribs may look something like this...</p>
+
+<pre><code>(function() {
+
+    if (window.Ribs === undefined)
+    throw 'Ribs has not been set up on the page.';
+
+    window.MyAppRibs = window.MyAppRibs || {};
+
+    window.MyAppRibs.Collection = window.Ribs.Collection;
+    window.MyAppRibs.Model = window.Ribs.Model;
+    window.MyAppRibs.View = window.Ribs.View;
+    window.MyAppRibs.SimpleView = window.Ribs.SimpleView;
+
+    window.MyAppRibs.SecureView = window.Ribs.SecureView.extend({
+    initialize: function(options) {
+        window.Ribs.SecureView.prototype.initialize.call(this, options);
+    },
+
+    applySecureLoginPrompt: function() {
+        // Show your app's login screen.
+    },
+
+    applyTimedOutSecureLoginPrompt: function() {
+        // Show your app's login screen with a timed out message.
+    }
+    });
+
+    window.MyAppRibs.Region = window.Ribs.Region.extend({
+    spinner: function() { return '&lt;b&gt;Your apps spinner here...&lt;/b&gt;'; }
+    });
+})();
+</code></pre>
+
+<p>Using RequireJS (which I wholeheartedly recommend if using Backbone and Ribs) it would look like this...</p>
+
+<pre><code>define(['ribs'],
+    function(Ribs) {
+
+    var exSecureView = Ribs.SecureView.extend({
+        initialize: function(options) {
+        Ribs.SecureView.prototype.initialize.call(this, options);
+        },
+
+        applySecureLoginPrompt: function() {
+        // Show your app's login screen.
+        },
+
+        applyTimedOutSecureLoginPrompt: function() {
+        // Show your app's login screen with a timed out message.
+        }
+    });
+
+    var exRegion = Ribs.Region.extend({
+        spinner: function() { return '&lt;b&gt;Your apps spinner here...&lt;/b&gt;'; }
+    });
+
+    return {
+        Collection: Ribs.Collection,
+        Model: Ribs.Model,
+        View: Ribs.View,
+        SimpleView: Ribs.SimpleView,
+        SecureView: exSecureView,
+        Region: exRegion
+    };
+    });
+</code></pre>
+        </div>
+        <a class="element-block__footer-link-wrapper" href="http://github.com/ministryotech" target="_blank">
+            <footer class="element-block__footer">
+                <i class="pre-icon fa fa-github-square"></i>
+                <span class="element-block__footer__link-text">Visit us on GitHub</span>
+                <i class="post-icon fa fa-external-link"></i>
+            </footer>
+        </a>
+    </section>
+<section class="element-block element-block--main">
+    <div id="disqus_thread" class="element-block__content element-block__content--no-footer"></div>
+</section>
+</div>
+<nav class="sidebar sidebar--external-project-links">
+    <dl>
+                <dd class="ungrouped">
+                    <i class="pre-icon fa fa-github"></i><a href="https://github.com/ministryotech/backbone-ribs" target="_blank">View on GitHub</a>
+                    <i class="post-icon fa fa-external-link"></i>
+                </dd>
+                <dd class="ungrouped">
+                    <i class="pre-icon fa fa-codepen"></i><a href="https://www.npmjs.com/package/backbone-ribs" target="_blank">Install from NPM</a>
+                    <i class="post-icon fa fa-external-link"></i>
+                </dd>
+    </dl>
+</nav>
+<nav class="sidebar sidebar--services-selector">
+    <h1><i class="pre-icon fa fa-code-fork"></i> <a href="../index.html">Open Source</a></h1>
+    <ul>
+            <li><a class="" href="../api-security/index.html">API Security</a></li>
+            <li><a class="" href="../argument-guard/index.html">Argument Guard</a></li>
+            <li><a class="selected" href="index.html">Backbone Ribs</a></li>
+            <li><a class="" href="../client-mvc/index.html">Client MVC</a></li>
+            <li><a class="" href="../compositions/index.html">Compositions</a></li>
+            <li><a class="" href="../csv/index.html">CSV</a></li>
+            <li><a class="" href="../date-time-abstractions/index.html">Date Time Abstractions</a></li>
+            <li><a class="" href="../entity-framework-repolayer/index.html">Entity Framework RepoLayer</a></li>
+            <li><a class="" href="../fluent-guard/index.html">Fluent Guard</a></li>
+            <li><a class="" href="../iis-multi-host-redirector/index.html">IIS Multi-Host Redirector</a></li>
+            <li><a class="" href="../javascript-on-load-function-stack/index.html">JavaScript On Load Function Stack</a></li>
+            <li><a class="" href="../model-builder-abstractions/index.html">Model Builder Abstractions</a></li>
+            <li><a class="" href="../reflection-helper/index.html">Reflection Helper</a></li>
+            <li><a class="" href="../responsive-mq/index.html">Responsive MQ</a></li>
+            <li><a class="" href="../simple-twitter-stream/index.html">Simple Twitter Stream</a></li>
+            <li><a class="" href="../strong-typed/index.html">Strong Typed</a></li>
+            <li><a class="" href="../test-support/index.html">Test Support</a></li>
+            <li><a class="" href="../umbraco-pylon/index.html">Umbraco Pylon</a></li>
+            <li><a class="" href="../uri-path-manager/index.html">URI Path Manager</a></li>
+            <li><a class="" href="../url-navigator/index.html">URL Navigator</a></li>
+            <li><a class="" href="../web-theming/index.html">Web Theming</a></li>
+            <li><a class="" href="../webdriver-extensions/index.html">WebDriver Extensions</a></li>
+            <li><a class="" href="../window-wrapper/index.html">Window Wrapper</a></li>
+    </ul>
+</nav>
+<script type="text/javascript">
+    var disqus_identifier = 'www.minotech.co.uk-article-1324';
+    var disqus_title = 'Backbone Ribs';
+    var disqus_url = 'index.html';
+</script>
+
+            </div>
+        </div>
+        <footer class="brand-footer">
+            <div class="brand-footer__notes">
+                <p class="brand-footer__copyright"><i class="fa fa-copyright"></i> 2021 Keith Jackson (The Ministry of Technology)</p>
+                <p class="brand-footer__strapline">
+                    Pragmatic Agile Coaching & Consultancy, Software Development & Technical Architecture - Web, Cloud, Apps & Agile for
+                    an Alternative audience.
+                </p>
+                <p class="brand-footer__links">
+                    <a href="../../../elements/privacy-policy.html">Privacy Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/cookies-policy.html">Cookies Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/terms-and-conditions.html">Terms & Conditions</a>
+                </p>
+            </div>
+            <aside class="brand-footer__logos">
+                <section class="logos">
+    <div class="logos__social">
+        <a href="https://www.linkedin.com/company/the-ministry-of-technology/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--linkedin fa fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/ministryotech" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--twitter fa fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/agilerodent/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--instagram fa fa-instagram"></i>
+        </a>
+    </div>
+</section>
+            </aside>
+        </footer>
+        <!--<![endif]-->
+        <div class="clear"></div>
+    </div>
+    <script src="../../../js/head-1.0.3.min.js"></script>
+    <script>
+        head.js(
+'../../../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+'../../../js/ministry.min91af.js?v=7.1.0.25813',
+'../../../js/analytics91af.js?v=7.1.0.25813'
+);
+
+    </script>
+</body>
+
+<!-- Mirrored from www.minotech.co.uk/development/open-source-projects/backbone-ribs/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:45 GMT -->
+</html>
