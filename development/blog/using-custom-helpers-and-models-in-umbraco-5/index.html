@@ -38,12 +38,12 @@
     </div>
     <div class="outer">
         <header>
-            <a href="../../../developers/index.html" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
+            <a href="../../../developers/" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
             <!--[if IE]><p>This site is optimised for HTML5 and CSS3 and is not supported by IE9 or lower. <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->
 <i class="menu-button fa fa-bars"></i>
 <nav id="js-nav" class="bp-wide">
     <ul>
-                <li><a href="../../../index.html">Home</a></li>                <li><a href="../../index.html">Development</a></li>                <li><a href="../../mentoring/index.html">Mentoring</a></li>                <li><a class="selected" href="../index.html">Blog</a></li>                <li><a href="../../open-source-projects/index.html">Open Source</a></li>                <li><a href="../../../contact/index.html">Contact</a></li>    </ul>
+                <li><a href="../../../">Home</a></li>                <li><a href="../../">Development</a></li>                <li><a href="../../mentoring/">Mentoring</a></li>                <li><a class="selected" href="../">Blog</a></li>                <li><a href="../../open-source-projects/">Open Source</a></li>                <li><a href="../../../contact/">Contact</a></li>    </ul>
 </nav>        </header>
         <!--[if gt IE 9]><!-->
         <div class="inner">
@@ -51,7 +51,7 @@
                     <h1> Using Custom Helpers and Models in Umbraco 5 </h1>
                                     <section class="subdata">
                         
-    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 23/05/2012</span>
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 23/05/2012</span>
     
                     </section>
             </section>
@@ -62,7 +62,7 @@
                             <h1> Using Custom Helpers and Models in Umbraco 5 </h1>
                                 <section class="subdata">
                                     
-    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 23/05/2012</span>
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 23/05/2012</span>
     
                                 </section>
                         </div>
@@ -86,7 +86,7 @@
 <pre>using Umbraco.Cms.Web;<br />using Umbraco.Cms.Web.Model;<br /> <br /> namespace Ministry.Ministryotech.UI.Web<br />{<br />     public class Ministryotech<br />      {<br />           private Content blogRoll;<br />           private Content rootAncestor;<br /><br />           public Ministryotech(UmbracoHelper umbraco)<br />           {<br />                Umbraco = umbraco;<br />           }<br /><br />           private UmbracoHelper Umbraco { get; set; }<br /><br />           public Content BlogRoll<br />           {<br />                get { return blogRoll ?? (blogRoll = Umbraco.GetContentById(BlogRollID)); }<br />           }<br /><br />           public Content RootAncestor<br />           {<br />                get { return rootAncestor ?? (rootAncestor = Umbraco.GetContentById(RootAncestorID)); }<br />           }<br /><br />           public static string BlogRollID<br />           {<br />                get { return "content://p__nhibernate/v__guid/8cd5428a728a4be3acf1a01d00c9c59d"; }<br />           }<br /><br />           public static string RootAncestorID<br />           {<br />                get { return "content://p__nhibernate/v__guid/3510e9f19e0a4ef5a437a0040183cccb"; }<br />           }<br /><br />           public static string DevelopmentID<br />           {<br />                get { return "content://p__nhibernate/v__guid/5ac32a1f05984705baa5a0200131cdcb"; }<br />           }<br /><br />           public static string ConsultancyID<br />           {<br />                get { return "content://p__nhibernate/v__guid/d3429fe14c0049faae9ba0200131e960"; }<br />           }<br /><br />           public static string TeamManagementID<br />           {<br />                get { return "content://p__nhibernate/v__guid/75c95d57f7f74e23b54ca0200131fc49"; }<br />           }<br />      }<br />}</pre>
 <p>The helper is all well and good, but the usage within a View is rather awkward and, as it would be instantiated manually, would make for bad readability - something I like to avoid in my code in general but particularly in views. In order to make this more usable we need to override the base classes of the view. I'll come back to that in a moment; as the override also helps us with models.</p>
 <h2>Custom Models</h2>
-<p>You will end up creating custom models for several reasons. Either you want to pass a complex type to a partial, thereby not using a Macro, or you have a partial that requires parameters but isn't appropriate for a Macro (see my <a href="../managing-umbraco-501-performance/index.html" title="Managing Umbraco 5.0.1 Performance">earlier post on performance</a>). You will also need these if you are setting up a custom controller, as I had to do for this blog and you need to pass data through.</p>
+<p>You will end up creating custom models for several reasons. Either you want to pass a complex type to a partial, thereby not using a Macro, or you have a partial that requires parameters but isn't appropriate for a Macro (see my <a href="../managing-umbraco-501-performance/" title="Managing Umbraco 5.0.1 Performance">earlier post on performance</a>). You will also need these if you are setting up a custom controller, as I had to do for this blog and you need to pass data through.</p>
 <p>Creating the model itself is fairly straightforward. In order to keep access to the relevant Umbraco data, access to the Content object (Which is the default model) is still required in most cases. With this in mind, I created a common interface that inherits from the default Umbraco equivalent, but allows the value of 'CurrentNode' to be set as well as read from. This needs to be set by the view base class overrides...</p>
 <pre>using Umbraco.Cms.Web.Model;<br /><br />namespace Ministry.Ministryotech.UI.Web.Models<br />{<br />   public interface IMinistryRenderModel : IUmbracoRenderModel<br />   {<br />       new Content CurrentNode { get; set; }<br />   }<br />}</pre>
 <p>I then implement this interface for each of the Models that I created. Here's a simple example...</p>
@@ -104,11 +104,11 @@
 <p>In ordr to use the ciustom models within either a Partial or a View, simply change the inherits statement at the top of the page to point at the name of your new base type (MinistryotechRenderViewPage in the example above), with or without a type parameter as appropriate. The strongly typed custom model, if added, will immediately be accessible within the view. This will not currently work with Macros. Macros use different base classes to work and, due to their interraction with the backend for construction and maintenance overriding their base classes is not appropriate.</p>
 </article>
         <footer class="element-block__footer">
-                <a href="../managing-umbraco-501-performance/index.html">
+                <a href="../managing-umbraco-501-performance/">
         <i class="pre-icon fa fa-arrow-left"></i>
         <span class="element-block__footer__link-text">Previous Article</span>
     </a>
-    <a href="../ministry-open-source-multi-host-redirector/index.html">
+    <a href="../ministry-open-source-multi-host-redirector/">
         <i class="post-icon fa fa-arrow-right"></i>
         <span class="element-block__footer__link-text element-block__footer__link-text--right">Next Article</span>
     </a>
@@ -120,18 +120,18 @@
     </section>
 </div>
 <nav class="sidebar sidebar--articles-selector">
-            <h1><i class="pre-icon fa fa-file-text"></i> <a href="../index.html">Latest Entries</a></h1>
+            <h1><i class="pre-icon fa fa-file-text"></i> <a href="../">Latest Entries</a></h1>
     <ul>
-                <li><a href="../the-pylon-is-live/index.html">The Pylon is Live</a></li>
-                <li><a href="../umbraco-published-content-seems-wrong/index.html">Umbraco Published Content seems wrong</a></li>
-                <li><a href="../open-source-products-refreshed/index.html">Open Source Products - Refreshed</a></li>
-                <li><a href="../testing-web-api-routes-with-ministry-open-source/index.html">Testing Web API Routes with Ministry Open Source</a></li>
-                <li><a href="../azure-umbraco-friends-at-last/index.html">Azure &amp; Umbraco - Friends at Last?</a></li>
-                <li><a href="../entity-framework-repositories-now-on-nuget/index.html">Entity Framework Repositories - now on nuget</a></li>
-                <li><a href="../azure-not-a-lean-solution/index.html">Azure - Not a lean solution</a></li>
-                <li><a href="../migrating-umbraco-5-to-umbraco-411/index.html">Migrating Umbraco 5 to Umbraco 4.11</a></li>
-                <li><a href="../testing-mvc-routes-with-ministry-open-source/index.html">Testing MVC Routes with Ministry Open Source</a></li>
-                <li><a href="../detecting-touch-devices/index.html">Detecting Touch Devices</a></li>
+                <li><a href="../the-pylon-is-live/">The Pylon is Live</a></li>
+                <li><a href="../umbraco-published-content-seems-wrong/">Umbraco Published Content seems wrong</a></li>
+                <li><a href="../open-source-products-refreshed/">Open Source Products - Refreshed</a></li>
+                <li><a href="../testing-web-api-routes-with-ministry-open-source/">Testing Web API Routes with Ministry Open Source</a></li>
+                <li><a href="../azure-umbraco-friends-at-last/">Azure &amp; Umbraco - Friends at Last?</a></li>
+                <li><a href="../entity-framework-repositories-now-on-nuget/">Entity Framework Repositories - now on nuget</a></li>
+                <li><a href="../azure-not-a-lean-solution/">Azure - Not a lean solution</a></li>
+                <li><a href="../migrating-umbraco-5-to-umbraco-411/">Migrating Umbraco 5 to Umbraco 4.11</a></li>
+                <li><a href="../testing-mvc-routes-with-ministry-open-source/">Testing MVC Routes with Ministry Open Source</a></li>
+                <li><a href="../detecting-touch-devices/">Detecting Touch Devices</a></li>
 
     </ul>
 
