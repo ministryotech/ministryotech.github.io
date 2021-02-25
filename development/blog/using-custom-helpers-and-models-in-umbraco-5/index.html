@@ -1,0 +1,193 @@
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from www.minotech.co.uk/development/blog/using-custom-helpers-and-models-in-umbraco-5/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:31:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <script>
+        // Pure JavaScript 'JS enabled' hook for styling
+        var _ = document.getElementsByTagName('html')[0];
+        _.className = _.className.replace(/(?:^|\s)no-js(?!\S)/g, 'js');
+    </script>
+
+    <meta charset="utf-8" />
+    <title>Using Custom Helpers and Models in Umbraco 5 - The Ministry of Technology</title>
+    <meta name="description" content="Holistic Technical Counsel - Agile Software Development & Management with a difference" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../images/ministry/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/ministry/apple-touch-icon-114x114-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/ministry/apple-touch-icon-72x72-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" href="../../../images/ministry/apple-touch-icon-precomposed9078.png?v=7.1.0.25803" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../../../3rd-party/maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../css/development-style.min91af.css?v=7.1.0.25813" />
+    <!-- References -->
+    <link rel="author" href="../../../humans.txt" />
+
+    <!-- Scripts to execute before page load begins -->
+    <script src="../../../3rd-party/use.typekit.net/sha1jar.js"></script>
+    <script>try { Typekit.load(); } catch (e) { }</script>
+</head>
+<body class="dev-body">
+    <div class="wide-bg">
+        <img src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="" />
+    </div>
+    <div class="outer">
+        <header>
+            <a href="../../../developers/index.html" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
+            <!--[if IE]><p>This site is optimised for HTML5 and CSS3 and is not supported by IE9 or lower. <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->
+<i class="menu-button fa fa-bars"></i>
+<nav id="js-nav" class="bp-wide">
+    <ul>
+                <li><a href="../../../index.html">Home</a></li>                <li><a href="../../index.html">Development</a></li>                <li><a href="../../mentoring/index.html">Mentoring</a></li>                <li><a class="selected" href="../index.html">Blog</a></li>                <li><a href="../../open-source-projects/index.html">Open Source</a></li>                <li><a href="../../../contact/index.html">Contact</a></li>    </ul>
+</nav>        </header>
+        <!--[if gt IE 9]><!-->
+        <div class="inner">
+            <section class="page-title-or-logo">
+                    <h1> Using Custom Helpers and Models in Umbraco 5 </h1>
+                                    <section class="subdata">
+                        
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 23/05/2012</span>
+    
+                    </section>
+            </section>
+            <img class="mobile-fold" src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="Show Menu" />
+            <div class="block-container ">
+                    <section class="element-block element-block--intro element-block--title">
+                        <div class="element-block__content">
+                            <h1> Using Custom Helpers and Models in Umbraco 5 </h1>
+                                <section class="subdata">
+                                    
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 23/05/2012</span>
+    
+                                </section>
+                        </div>
+                    </section>
+                
+
+
+
+<div class="main-strip">
+    <section class="element-block element-block--main">
+        <article class="element-block__content">
+    <p>The new Umbraco 5 platform is extremely extensible for developers. By using Visual Studio to put together your CMS front end you can easily add custom controllers and models, making the best of the MVC infrastructure. Umbraco 5 generally seems to make this process very easy rather than having to fight with Umbraco 4.x. What I intend to go through in this article is the process of creating the following...</p>
+<ul>
+<li>A site helper to provide commonly used data</li>
+<li>Custom models</li>
+<li>Overriding the default base classes for pages and partials</li>
+</ul>
+<p>The third item in the list above is actually the most crucial and acts as an enabler for the other two elements.</p>
+<h2>Site Helper</h2>
+<p>A custom site helper is extremely handy for holding commonly used data across the site. You can use this to return common HiveIDs or content that you will need over and over again. I used my helper to improve performance slightly and avoid loading the same Hive node repeatedly as well as storing some common IDs. My Helper is as follows...</p>
+<pre>using Umbraco.Cms.Web;<br />using Umbraco.Cms.Web.Model;<br /> <br /> namespace Ministry.Ministryotech.UI.Web<br />{<br />     public class Ministryotech<br />      {<br />           private Content blogRoll;<br />           private Content rootAncestor;<br /><br />           public Ministryotech(UmbracoHelper umbraco)<br />           {<br />                Umbraco = umbraco;<br />           }<br /><br />           private UmbracoHelper Umbraco { get; set; }<br /><br />           public Content BlogRoll<br />           {<br />                get { return blogRoll ?? (blogRoll = Umbraco.GetContentById(BlogRollID)); }<br />           }<br /><br />           public Content RootAncestor<br />           {<br />                get { return rootAncestor ?? (rootAncestor = Umbraco.GetContentById(RootAncestorID)); }<br />           }<br /><br />           public static string BlogRollID<br />           {<br />                get { return "content://p__nhibernate/v__guid/8cd5428a728a4be3acf1a01d00c9c59d"; }<br />           }<br /><br />           public static string RootAncestorID<br />           {<br />                get { return "content://p__nhibernate/v__guid/3510e9f19e0a4ef5a437a0040183cccb"; }<br />           }<br /><br />           public static string DevelopmentID<br />           {<br />                get { return "content://p__nhibernate/v__guid/5ac32a1f05984705baa5a0200131cdcb"; }<br />           }<br /><br />           public static string ConsultancyID<br />           {<br />                get { return "content://p__nhibernate/v__guid/d3429fe14c0049faae9ba0200131e960"; }<br />           }<br /><br />           public static string TeamManagementID<br />           {<br />                get { return "content://p__nhibernate/v__guid/75c95d57f7f74e23b54ca0200131fc49"; }<br />           }<br />      }<br />}</pre>
+<p>The helper is all well and good, but the usage within a View is rather awkward and, as it would be instantiated manually, would make for bad readability - something I like to avoid in my code in general but particularly in views. In order to make this more usable we need to override the base classes of the view. I'll come back to that in a moment; as the override also helps us with models.</p>
+<h2>Custom Models</h2>
+<p>You will end up creating custom models for several reasons. Either you want to pass a complex type to a partial, thereby not using a Macro, or you have a partial that requires parameters but isn't appropriate for a Macro (see my <a href="../managing-umbraco-501-performance/index.html" title="Managing Umbraco 5.0.1 Performance">earlier post on performance</a>). You will also need these if you are setting up a custom controller, as I had to do for this blog and you need to pass data through.</p>
+<p>Creating the model itself is fairly straightforward. In order to keep access to the relevant Umbraco data, access to the Content object (Which is the default model) is still required in most cases. With this in mind, I created a common interface that inherits from the default Umbraco equivalent, but allows the value of 'CurrentNode' to be set as well as read from. This needs to be set by the view base class overrides...</p>
+<pre>using Umbraco.Cms.Web.Model;<br /><br />namespace Ministry.Ministryotech.UI.Web.Models<br />{<br />   public interface IMinistryRenderModel : IUmbracoRenderModel<br />   {<br />       new Content CurrentNode { get; set; }<br />   }<br />}</pre>
+<p>I then implement this interface for each of the Models that I created. Here's a simple example...</p>
+<pre>using Umbraco.Cms.Web.Model;<br /><br />namespace Ministry.Ministryotech.UI.Web.Models<br />{<br />    public class ArticleSummaryOptionViewModel : IMinistryRenderModel<br />    {<br />        public Content CurrentNode { get; set; }<br />        public string Category { get; set; }<br />        public bool IncludeTechnicalArticles { get; set; }<br />    }<br />}</pre>
+<p>This simply adds a Category and boolean parameter to determine which articles should be shown in a summary partial.</p>
+<h3>Why not use a macro?</h3>
+<p>Macros aren't strongly typed which means a lot of string conversions which, I think, leads to less readable code. Also, in some cases performance isn't as high.</p>
+<h2>Overriding Base Classes</h2>
+<p>The standard partial and view model is an instance of Content. In order to both use our custom models that we looked at above and to make the Syntax of accessing our site helper a bit more intuitive there are some key Umbraco classes we can override.</p>
+<p>Before we can override any of the classes, we need to create our own version of RenderViewPageContext, as this is an internal class. I simply copied the following from the Umbraco 5 codebase and renamed it. I strongly advise on renaming it otherwise nasty errors can happen when the wrong object type gets picked up from HttpContext. This is also where we will allow our helper to be created. I've intentionally given the helper instance the same name as the class so that we can use the same syntax for accessing the static elements, which are also available from views that do not inherit from our custom base types.</p>
+<pre>using System;<br />using System.Web;<br />using System.Web.Mvc;<br />using Umbraco.Cms.Web;<br />using Umbraco.Cms.Web.Context;<br />using Umbraco.Cms.Web.Model;<br /><br />namespace Ministry.Ministryotech.UI.Web<br />{<br />     internal class MinistryotechRenderViewPageContext<br />     {<br />         private readonly ControllerContext _controllerContext;<br />         private readonly HttpContextBase _http;<br /><br />         public MinistryotechRenderViewPageContext(ControllerContext controllerContext)<br />         {<br />             _controllerContext = controllerContext;<br />             _http = _controllerContext.HttpContext;<br />         }<br /> <br />         private T GetService&lt;T&gt;(Func&lt;MinistryotechRenderViewPageContext, T&gt; fromContext, Func&lt;T&gt; ifAllElseFails) where T : class<br />         {<br />             //this will only occur for layout files, so try to retreive it from HttpContextItems since the             RenderViewPageActivator will store it there too<br />             if (!_http.Items.Contains(typeof(MinistryotechRenderViewPageContext).Name))<br />             {<br />                 return ifAllElseFails();<br />             }<br /> <br />            var ctx = _http.Items[typeof(MinistryotechRenderViewPageContext).Name] as MinistryotechRenderViewPageContext;<br />             if (ctx != null)<br />             {<br />                 var service = fromContext(ctx);<br />                 if (service == null)<br />                     throw new InvalidOperationException("Could not resolve RenderViewPageContext from HttpContext Items, this will only occur if you have a layout view inheriting from RenderViewPage but are not rendering a View inheriting from RenderViewPage which is not valid.");<br />                 return service;<br />             }<br /> <br />            throw new InvalidOperationException("The item with key " + typeof(MinistryotechRenderViewPageContext).Name + " is not of type " + typeof(MinistryotechRenderViewPageContext).FullName + " inside the HttpContext Items");<br />         }<br /> <br />         private IRenderModelFactory _renderModelFactory;<br />         public IRenderModelFactory RenderModelFactory<br />         {<br />             get { return _renderModelFactory ?? (_renderModelFactory = GetService(ctx =&gt; ctx.RenderModelFactory, () =&gt; DependencyResolver.Current.GetService&lt;IRenderModelFactory&gt;())); }<br /><br />            internal set { _renderModelFactory = value; }<br />         }<br /> <br />         private IRoutableRequestContext _routableRequestContext;<br />         public IRoutableRequestContext RoutableRequestContext<br />         {<br />             get { return _routableRequestContext ?? (_routableRequestContext = GetService(ctx =&gt; ctx.RoutableRequestContext, () =&gt; DependencyResolver.Current.GetService&lt;IRoutableRequestContext&gt;())); }<br />             internal set { _routableRequestContext = value; }<br />         }<br /> <br />         public IRenderViewHiveManagerWrapper Hive { get { return new RenderViewHiveManagerWrapper(RoutableRequestContext.Application.Hive); } }<br /> <br />         private UmbracoHelper _umbraco;<br />         public UmbracoHelper Umbraco<br />         {<br />             get<br />             {<br />                 return _umbraco ?? (_umbraco = GetService(ctx =&gt; ctx.Umbraco, () =&gt; new UmbracoHelper(_controllerContext, RoutableRequestContext, RenderModelFactory)));<br />             }<br />             internal set { _umbraco = value; }<br />         }<br /> <br />         private Ministryotech _ministryotech; <br />         public Ministryotech Ministryotech<br />         {<br />             get<br />             {<br />                 return _ministryotech ?? (_ministryotech = new Ministryotech(Umbraco));<br />             }<br />         }<br /> <br />         private IUmbracoRenderModel _model;<br />         public IUmbracoRenderModel RenderModel<br />         {<br />             get<br />             {<br />                 return _model ?? (_model = GetService(ctx =&gt; ctx.RenderModel, () =&gt; RenderModelFactory.Create(_http, _http.Request.RawUrl)));<br />             }<br />             internal set { _model = value; }<br />         }<br /> <br />         private dynamic _dynamicModel;<br />         public dynamic DynamicModel<br />         {<br />             get { return _dynamicModel ?? (_dynamicModel = RenderModel.CurrentNode.AsDynamic()); }<br />         }<br />     }<br />}</pre>
+<p>We can now provide our overriding classes. I did this in three parts, using a common base class with inheriting types that allow either specification of a custom type that implements the IMinistryRenderModel interface or, with no type specified, falls back to the default type, Content. Here we expose the site helper to the inheriting view as </p>
+<pre>using System; <br />using System.Web; <br />using System.Web.Mvc; <br />using Ministry.Ministryotech.UI.Web.Models; <br />using Umbraco.Cms.Web; <br />using Umbraco.Cms.Web.Context; <br />using Umbraco.Cms.Web.Model; <br /> <br />namespace Ministry.Ministryotech.UI.Web <br />{ <br />    /// &lt;summary&gt; <br />    /// The View that front-end templates inherit from <br />    /// &lt;/summary&gt; <br />    public abstract class MinistryotechRenderViewPage : MinistryotechRenderViewPageBase&lt;Content&gt; <br />    { <br />        /// &lt;summary&gt; <br />        /// This will ensure that the Model and RenderViewPageContext are set. This is generally only called for Layouts. <br />        /// &lt;/summary&gt; <br />        /// &lt;param name="parentPage"&gt;&lt;/param&gt; <br />        /// &lt;remarks&gt; <br />        /// This method is only required for Layout pages since they are not created by the IViewPageActivator and the Model is not set on them <br />        /// directly because it is normally only set for the view returned from the controller. <br />        /// &lt;/remarks&gt; <br />        protected override void ConfigurePage(global::System.Web.WebPages.WebPageBase parentPage) <br />        { <br />            base.ConfigurePage(parentPage); <br /> <br />            //set the model to the current node if it is not set, this is generally not the case <br />            if (Model == null) <br />            { <br />                if (Model == null) <br />                { <br />                    this.ViewData.Model = RenderViewPageContext.RenderModel.CurrentNode; <br />                } <br />            } <br />        } <br />    } <br /> <br /> <br />    /// &lt;summary&gt; <br />    /// The View that front-end templates inherit from <br />    /// &lt;/summary&gt; <br />    public abstract class MinistryotechRenderViewPage&lt;TModel&gt; : MinistryotechRenderViewPageBase&lt;TModel&gt; <br />        where TModel : IMinistryRenderModel, new() <br />    { <br />        /// &lt;summary&gt; <br />        /// This will ensure that the Model and RenderViewPageContext are set. This is generally only called for Layouts. <br />        /// &lt;/summary&gt; <br />        /// &lt;param name="parentPage"&gt;&lt;/param&gt; <br />        /// &lt;remarks&gt; <br />        /// This method is only required for Layout pages since they are not created by the IViewPageActivator and the Model is not set on them <br />        /// directly because it is normally only set for the view returned from the controller. <br />        /// &lt;/remarks&gt; <br />        protected override void ConfigurePage(global::System.Web.WebPages.WebPageBase parentPage) <br />        { <br />            base.ConfigurePage(parentPage); <br /> <br />            //set the model to the current node if it is not set, this is generally not the case <br />            if (Model == null) <br />            { <br />                if (Model == null) <br />                { <br />                    this.ViewData.Model.CurrentNode = RenderViewPageContext.RenderModel.CurrentNode; <br />                } <br />            } <br />        } <br />    } <br /> <br /> <br />    /// &lt;summary&gt; <br />    /// The View that front-end templates inherit from <br />    /// &lt;/summary&gt; <br />    public abstract class MinistryotechRenderViewPageBase&lt;TModel&gt; : WebViewPage&lt;TModel&gt; <br />    { <br />        private MinistryotechRenderViewPageContext _renderViewPageContext; <br /> <br />        /// &lt;summary&gt; <br />        /// Gets/sets the RenderViewPageContext which exposes all of the dependencies needed to return the custom properties of this view <br />        /// &lt;/summary&gt; <br />        internal MinistryotechRenderViewPageContext RenderViewPageContext <br />        { <br />            get <br />            { <br />                //the context will only be null for layout pages <br />                if (_renderViewPageContext == null) <br />                { <br />                    //at no time should this be null unless someone is trying to execute this page outside of normal mvc scope <br />                    if (ViewContext == null) <br />                        throw new InvalidOperationException("Cannot access the RenderViewPage custom properties without a ViewContext"); <br />                    _renderViewPageContext = new MinistryotechRenderViewPageContext(ViewContext.Controller.ControllerContext); <br />                } <br />                return _renderViewPageContext; <br />            } <br />            set { _renderViewPageContext = value; } <br />        } <br /> <br />        /// &lt;summary&gt; <br />        /// This will ensure that the Model and RenderViewPageContext are set. This is generally only called for Layouts. <br />        /// &lt;/summary&gt; <br />        /// &lt;param name="parentPage"&gt;&lt;/param&gt; <br />        /// &lt;remarks&gt; <br />        /// This method is only required for Layout pages since they are not created by the IViewPageActivator and the Model is not set on them <br />        /// directly because it is normally only set for the view returned from the controller. <br />        /// &lt;/remarks&gt; <br />        protected override void ConfigurePage(global::System.Web.WebPages.WebPageBase parentPage) <br />        { <br />            base.ConfigurePage(parentPage); <br />        } <br /> <br />        /// &lt;summary&gt; <br />        /// The current routable request context <br />        /// &lt;/summary&gt; <br />        public IRoutableRequestContext RoutableRequestContext <br />        { <br />            get { return RenderViewPageContext.RoutableRequestContext; } <br />        } <br /> <br />        /// &lt;summary&gt; <br />        /// Gets the &lt;see cref="IHiveManager"/&gt; for the application. You can use this to run queries against the data for this application. <br />        /// &lt;/summary&gt; <br />        /// &lt;value&gt;The hive.&lt;/value&gt; <br />        public IRenderViewHiveManagerWrapper Hive { get { return new RenderViewHiveManagerWrapper(RoutableRequestContext.Application.Hive); } } <br /> <br />        /// &lt;summary&gt; <br />        /// Gets an umbraco helper <br />        /// &lt;/summary&gt; <br />        public UmbracoHelper Umbraco <br />        { <br />            get { return RenderViewPageContext.Umbraco; } <br />        } <br /> <br />        /// &lt;summary&gt; <br />        /// Gets a ministry helper <br />        /// &lt;/summary&gt; <br />        public Ministryotech Ministryotech <br />        { <br />            get { return RenderViewPageContext.Ministryotech; } <br />        } <br /> <br />        /// &lt;summary&gt; <br />        /// Gets the &lt;see cref="Model"/&gt; as a dynamic object. <br />        /// &lt;/summary&gt; <br />        /// &lt;remarks&gt;&lt;/remarks&gt; <br />        public dynamic DynamicModel <br />        { <br />            get { return RenderViewPageContext.DynamicModel; } <br />        } <br />    } <br />}</pre>
+<p>The key difference between the two implementations is that in the default scenario (which is the same as for Umbraco 5 off the shelf) the Model itself is made it's own Current Node. In the alternative implementation for custom model types the content is only accessible through the CurrentNode property of the Model.</p>
+<p>In ordr to use the ciustom models within either a Partial or a View, simply change the inherits statement at the top of the page to point at the name of your new base type (MinistryotechRenderViewPage in the example above), with or without a type parameter as appropriate. The strongly typed custom model, if added, will immediately be accessible within the view. This will not currently work with Macros. Macros use different base classes to work and, due to their interraction with the backend for construction and maintenance overriding their base classes is not appropriate.</p>
+</article>
+        <footer class="element-block__footer">
+                <a href="../managing-umbraco-501-performance/index.html">
+        <i class="pre-icon fa fa-arrow-left"></i>
+        <span class="element-block__footer__link-text">Previous Article</span>
+    </a>
+    <a href="../ministry-open-source-multi-host-redirector/index.html">
+        <i class="post-icon fa fa-arrow-right"></i>
+        <span class="element-block__footer__link-text element-block__footer__link-text--right">Next Article</span>
+    </a>
+
+        </footer>
+    </section>
+    <section class="element-block element-block--main">
+        <div id="disqus_thread" class="element-block__content element-block__content--no-footer"></div>
+    </section>
+</div>
+<nav class="sidebar sidebar--articles-selector">
+            <h1><i class="pre-icon fa fa-file-text"></i> <a href="../index.html">Latest Entries</a></h1>
+    <ul>
+                <li><a href="../the-pylon-is-live/index.html">The Pylon is Live</a></li>
+                <li><a href="../umbraco-published-content-seems-wrong/index.html">Umbraco Published Content seems wrong</a></li>
+                <li><a href="../open-source-products-refreshed/index.html">Open Source Products - Refreshed</a></li>
+                <li><a href="../testing-web-api-routes-with-ministry-open-source/index.html">Testing Web API Routes with Ministry Open Source</a></li>
+                <li><a href="../azure-umbraco-friends-at-last/index.html">Azure &amp; Umbraco - Friends at Last?</a></li>
+                <li><a href="../entity-framework-repositories-now-on-nuget/index.html">Entity Framework Repositories - now on nuget</a></li>
+                <li><a href="../azure-not-a-lean-solution/index.html">Azure - Not a lean solution</a></li>
+                <li><a href="../migrating-umbraco-5-to-umbraco-411/index.html">Migrating Umbraco 5 to Umbraco 4.11</a></li>
+                <li><a href="../testing-mvc-routes-with-ministry-open-source/index.html">Testing MVC Routes with Ministry Open Source</a></li>
+                <li><a href="../detecting-touch-devices/index.html">Detecting Touch Devices</a></li>
+
+    </ul>
+
+</nav>
+<script type="text/javascript">
+    var disqus_identifier = 'www.minotech.co.uk-article-1107';
+    var disqus_title = 'Using Custom Helpers and Models in Umbraco 5';
+    var disqus_url = 'index.html';
+</script>
+
+            </div>
+        </div>
+        <footer class="brand-footer">
+            <div class="brand-footer__notes">
+                <p class="brand-footer__copyright"><i class="fa fa-copyright"></i> 2021 Keith Jackson (The Ministry of Technology)</p>
+                <p class="brand-footer__strapline">
+                    Pragmatic Agile Coaching & Consultancy, Software Development & Technical Architecture - Web, Cloud, Apps & Agile for
+                    an Alternative audience.
+                </p>
+                <p class="brand-footer__links">
+                    <a href="../../../elements/privacy-policy.html">Privacy Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/cookies-policy.html">Cookies Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/terms-and-conditions.html">Terms & Conditions</a>
+                </p>
+            </div>
+            <aside class="brand-footer__logos">
+                <section class="logos">
+    <div class="logos__social">
+        <a href="https://www.linkedin.com/company/the-ministry-of-technology/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--linkedin fa fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/ministryotech" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--twitter fa fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/agilerodent/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--instagram fa fa-instagram"></i>
+        </a>
+    </div>
+</section>
+            </aside>
+        </footer>
+        <!--<![endif]-->
+        <div class="clear"></div>
+    </div>
+    <script src="../../../js/head-1.0.3.min.js"></script>
+    <script>
+        head.js(
+'../../../3rd-party/ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+'../../../js/ministry.min91af.js?v=7.1.0.25813',
+'../../../js/analytics91af.js?v=7.1.0.25813'
+);
+
+    </script>
+</body>
+
+<!-- Mirrored from www.minotech.co.uk/development/blog/using-custom-helpers-and-models-in-umbraco-5/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:31:08 GMT -->
+</html>

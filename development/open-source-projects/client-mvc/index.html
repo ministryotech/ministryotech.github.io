@@ -1,0 +1,614 @@
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from www.minotech.co.uk/development/open-source-projects/client-mvc/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <script>
+        // Pure JavaScript 'JS enabled' hook for styling
+        var _ = document.getElementsByTagName('html')[0];
+        _.className = _.className.replace(/(?:^|\s)no-js(?!\S)/g, 'js');
+    </script>
+
+    <meta charset="utf-8" />
+    <title>Client MVC - The Ministry of Technology</title>
+    <meta name="description" content="Holistic Technical Counsel - Agile Software Development & Management with a difference" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../images/ministry/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/ministry/apple-touch-icon-114x114-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/ministry/apple-touch-icon-72x72-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" href="../../../images/ministry/apple-touch-icon-precomposed9078.png?v=7.1.0.25803" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../../../3rd-party/maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../css/development-style.min91af.css?v=7.1.0.25813" />
+    <!-- References -->
+    <link rel="author" href="../../../humans.txt" />
+
+    <!-- Scripts to execute before page load begins -->
+    <script src="../../../3rd-party/use.typekit.net/sha1jar.js"></script>
+    <script>try { Typekit.load(); } catch (e) { }</script>
+</head>
+<body class="dev-body">
+    <div class="wide-bg">
+        <img src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="" />
+    </div>
+    <div class="outer">
+        <header>
+            <a href="../../../developers/index.html" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
+            <!--[if IE]><p>This site is optimised for HTML5 and CSS3 and is not supported by IE9 or lower. <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->
+<i class="menu-button fa fa-bars"></i>
+<nav id="js-nav" class="bp-wide">
+    <ul>
+                <li><a href="../../../index.html">Home</a></li>                <li><a href="../../index.html">Development</a></li>                <li><a href="../../mentoring/index.html">Mentoring</a></li>                <li><a href="../../blog/index.html">Blog</a></li>                <li><a class="selected" href="../index.html">Open Source</a></li>                <li><a href="../../../contact/index.html">Contact</a></li>    </ul>
+</nav>        </header>
+        <!--[if gt IE 9]><!-->
+        <div class="inner">
+            <section class="page-title-or-logo">
+                    <h1> Client MVC </h1>
+                            </section>
+            <img class="mobile-fold" src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="Show Menu" />
+            <div class="block-container  project-page ">
+                    <section class="element-block element-block--intro element-block--title">
+                        <div class="element-block__content">
+                            <h1> Client MVC </h1>
+                        </div>
+                    </section>
+                
+
+
+<div class="main-strip">
+    <section class="element-block element-block--main">
+        <div class="element-block__linked-head-image element-block__linked-head-image--align-wider-right">
+            <img src="../../../images/development/oss.jpg" alt="Client MVC" />
+        </div>
+        <div class="element-block__content">
+            <div class="info">
+                
+                <span class="involvement">Created by Ministry</span>
+                <dl>
+                    <dt>Language</dt>
+                    <dd>JavaScript (ES5)</dd>
+                    <dt>Type</dt>
+                    <dd>Web</dd>
+                </dl>
+            </div>
+            <p>A lightweight client MVC framework for building small Single Page Applications in Javascript with it's roots in Backbone.</p>
+
+<h3>Introduction</h3>
+
+<p>A Lightweight MVC framework for Javascript with it's roots in Backbone. </p>
+
+<p>The opposite of my similar backbone-ribs project, the intention is to create a framework without the strict REST model dependencies of Backbone that is focussed on view management, leaving data access up to the framework user to do as they see fit. Models in Client MVC are regarded as simple dumb objects for the most part and can be basic JSON responses, the implementation of which is in your hands (hence why there are no base Model or Collection objects). Instead, Client MVC makes heavy use of controller classes which are expected to call data access methods to obtain data which can then be returned in either a custom form or as raw JSON.</p>
+
+<h4>Known Issues</h4>
+
+<ul>
+<li>This is still a heavy beta project</li>
+</ul>
+
+<h4>Dependencies</h4>
+
+<p>Client MVC is dependent on Underscore and jQuery. The jQuery dependency is not managed by the NPM or Nuget packages, giving you freedom to manage your jQuery implementation how you like.</p>
+
+<h3>Core Client MVC Objects</h3>
+
+<p>Client MVC currently exposes the following primary objects for building simple Single Page Apps...</p>
+
+<h4>ClientMVC.Controller</h4>
+
+<p>A Controller is where your application's core logic, or the entry points to it, should be located. 
+Any class extending ClientMVC.Controller should ensure to call the replaced methods as follows...</p>
+
+<pre><code>ClientMVC.Controller.prototype.init(view, region);
+</code></pre>
+
+<p>In Client MVC a controller is reponsible for managing the content of a given region (or regions).</p>
+
+<p>A sample controller could look like this...</p>
+
+<pre><code>var coreController = MVC.Controller.extend({
+
+    name : 'core controller',
+
+    init : function() {
+        ClientMVC.Controller.prototype.init(new CoreView(), new CoreRegion());
+    }
+
+    showAltView : function() {
+        ClientMVC.Controller.prototype.showView(new AltCoreView());
+    }
+
+});
+</code></pre>
+
+<p>All of the properties of the base controller defined here can be overridden as indicated in the sample region defined above. Each of these properties has a specific purpose...</p>
+
+<ul>
+<li>name : This is for debugging purposes only and indicates which view you are using - populating this will make identifying where errors occur far easier.</li>
+<li>region: The linked region object currently in use. THIS SHOULD NOT BE OVERRIDDEN (see init()).</li>
+<li><p>view: The linked view object currently in use. THIS SHOULD NOT BE OVERRIDDEN (see init()).</p></li>
+<li><p>init(): Initiates a controller - This sets the initial view and region and calls the 'showView()' method.</p></li>
+<li>showView(): Renders the specified view into the controller's region. If a view is not specified then the controller's initialView will be used.</li>
+</ul>
+
+<h4>ClientMVC.AuthController</h4>
+
+<p>An Auth Controller is a special type of controller that implements authentication. It's essentially your login controller whether the authentication process is user interractive or not. 
+Any class extending ClientMVC.AuthController should ensure to call the replaced methods as follows...</p>
+
+<pre><code>ClientMVC.AuthController.prototype.init(view, region);
+</code></pre>
+
+<p>An auth controller needs to implement an 'isAuthenticated()' method and optionally log in and log out features. It is responsible for handling the authentication of users and generating cookies and session data to ensure users are logged in.</p>
+
+<p>A sample controller could look something like this...</p>
+
+<pre><code>var loginController = ClientMVC.AuthController.extend({
+
+   currentSession : null,
+
+    init : function() {
+        ClientMVC.AuthController.prototype.init(new myView(), new myRegion())
+        if (this.isAuthenticated()) {
+            var hash = CookieManager.getSessionData().split(' ')[1];
+            this.currentSession = new UserSession(hash);
+        }
+    },
+
+    isAuthenticated : function() {
+        var authData = CookieManager.getSessionData();
+        return authData != undefined &amp;&amp; authData != null &amp;&amp; authData.length &gt; 0;
+    },
+
+    logIn : function() {},
+    logOut : function() {}
+
+});
+</code></pre>
+
+<p>All of the properties of the base controller can be overridden as indicated in the sample defined above. The 'isAuthenticated()' method MUST be overridden. Each of these properties has a specific purpose...</p>
+
+<ul>
+<li><p>name : This is for debugging purposes only and indicates which view you are using - populating this will make identifying where errors occur far easier.</p></li>
+<li><p>init(): Initiates a controller - This sets the initial view and region but DOES NOT call the showView() method.</p></li>
+<li>isAuthenticated(): Determines whether the site has a currently logged in user.</li>
+</ul>
+
+<h4>ClientMVC.SecuredController</h4>
+
+<p>A Secured Controller is a special type of controller which represents a controller where it's functionality is restricted by the authenticatin state of a provided Auth Controller (see above). 
+Any class extending ClientMVC.SecuredController should ensure to call the replaced methods as follows...</p>
+
+<pre><code>ClientMVC.SecuredController.prototype.init(view, region, authController);
+</code></pre>
+
+<p>A secured controller requires that an Auth Controller has been authenticated against in order to load. If authentication has failed or has not yet been made then the Secured Controller will redirect to the auth
+controller automatically.</p>
+
+<p>A sample controller could look something like this...</p>
+
+<pre><code>var secureController = ClientMVC.SecuredController.extend({
+
+    name : 'my secure controller',
+
+    init : function() {
+        ClientMVC.SecuredController.prototype.init(new myView(), new myRegion(), MYAPP.Controllers.MyAuthController);
+    }
+
+});
+</code></pre>
+
+<p>All of the properties of the base controller defined here can be overridden as indicated in the sample defined above.</p>
+
+<ul>
+<li><p>name : This is for debugging purposes only and indicates which view you are using - populating this will make identifying where errors occur far easier.</p></li>
+<li><p>init(): Initiates a controller - This either calls through to the base controller init method or shows the auth controller view if the auth controller has not yet been authenticated.</p></li>
+</ul>
+
+<h4>ClientMVC.Region</h4>
+
+<p>Region implementations generally tend to be extremely lightweight, as the Client MVC code here does most of what is required.</p>
+
+<p>Although the framework is lightweight and allows much variation; best practice when using Client MVC is to look at a 'View' as being responsible for itself in that it's a piece of contained markup that is NOT attached to anything on a page. In a Client MVC based App containers on a page are wrapped by Regions and the regions are responsible for then rendering a view into the container that they represent. So the basic rule is...</p>
+
+<ul>
+<li>Is it new markup? = View</li>
+<li>Is the markup a container that's already present in a page or generated by another view? = Region</li>
+</ul>
+
+<p>A Region is responsible for the rendering of any views within itself and triggering the binding and unbinding of any events.
+A sample region could look like this...</p>
+
+<pre><code>var coreRegion = MVC.Region.extend({
+
+    name : 'core region',
+    container: '#app-wrapper',
+
+});
+</code></pre>
+
+<p>All of the properties of the base region defined here can be overridden as indicated in the sample region defined above. Each of these properties has a specific purpose...</p>
+
+<ul>
+<li>name : This is for debugging purposes only and indicates which view you are using - populating this will make identifying where errors occur far easier.</li>
+<li>container: The jQuery selector representing the containing element that the region represents.</li>
+<li>parentRegion: The Region object representing the parent region. Null for the master region.</li>
+<li>parentView: The View object representing the parent view that the Region's selector is rendered in. Null for the master region.</li>
+<li><p>currentView: The View object currently rendered within the region.</p></li>
+<li><p>isAvailable(): Indicates if a region is available for rendering into.</p></li>
+<li>renderView(): Renders the specified view into the region. If the region container does not exist then this will trigger up the parent stack until an item is found and the items will render up to a point to allow the view to be rendered within this region. Once the view is rendered then the view's 'bindEvents()' method is triggered.</li>
+<li>disposeView(): Clears the current region and unbinds all events for the attached view. Disposal is important to avoid any memory leaks.</li>
+<li>extend(): This method is added to most of the key super classes in Client MVC and allows them to be extended and elements overridden and added to.</li>
+</ul>
+
+<p>ClientMVC.DefaultRegion: The namespace exposes a DefaultRegion instance. This should represent the region at the uppermost level of your SPA. This is set to a standard region by default, so if you create a simple HTML page with a div on it with an ID of 'app' then that is where the base region for the app will be - you can customise and override this as you like in your app initialisation.</p>
+
+<p>VIEW LIFECYCLE: Client MVC views maintain their bindings and have specific methods to dispose all of the events they use. A region will clear up any views it contains before allowing a new one to be attached, calling the 'clearEvents()' method on the view to clean up any used resources. It also has it's own 'disposeView()' method that will clear it's currentView.</p>
+
+<h4>ClientMVC.View</h4>
+
+<p>A view represents a visual element of the application and is always associated with a Template.</p>
+
+<p>Although the framework is lightweight and allows much variation; best practice when using Client MVC is to look at a 'View' as being responsible for itself in that it's a piece of contained markup that is NOT attached to anything on a page. In a Client MVC based App containers on a page are wrapped by Regions and the regions are responsible for then rendering a view into the container that they represent. So the basic rule is...</p>
+
+<ul>
+<li>Is it new markup? = View</li>
+<li>Is the markup a container that's already present in a page or generated by another view? = Region</li>
+</ul>
+
+<p>A view implementation will contain key elements defined below and map elements through jQuery selectors to the associated template.</p>
+
+<p>A sample view could look something like this...</p>
+
+<pre><code>var myView = ClientMVC.View.extend({
+
+    name : 'my view',
+    template: TemplateSource,
+
+});
+
+myView.prototype.renderContent = function() {
+    MyTemplateEngine.html(this.template, this.getDataObject();
+};
+
+myView.prototype.logOut = function(e) {
+    e.preventDefault();
+    MYAPP.Controllers.Auth.logOut();
+};
+
+myView.prototype.events = [
+    new ClientMVC.View.Event($('#logout-button'), 'click', myView.prototype.logOut)
+];
+</code></pre>
+
+<p>All of the properties of the base view can be overridden as indicated in the sample view defined above. If the template needs to be processed with data then the 'renderContent()' method must be replaced in the child class.</p>
+
+<ul>
+<li>name : This is for debugging purposes only and indicates which view you are using - populating this will make identifying where errors occur far easier.</li>
+<li>template: This is the template content for the view to process. This could be a piece of static HTML or it could be a fragment in a file, using a templating engine like Mustache or Handlebars.</li>
+<li>data: This is the JSON data or a function that returns JSON data to power the view and can be null.</li>
+<li><p>events: This is an array of ClientMVC.View.Event objects (see below) which map defined elements in the template.</p></li>
+<li><p>getDataObject(): The data object from View.data as an object fully loaded. Should be called by renderContent();</p></li>
+<li>bindEvents(): Goes through any events defined and binds them to the template. This method is called automatically by a region when it renders the view.</li>
+<li>clearEvents(): Removes any existing event bindings on the view. This method is called automatically by a region when disposing of a view.</li>
+<li>renderContent(): By default, this returns the template content as it stands. This is fine if the template is static HTML. If you need to process data with your view then this method should be overridden.</li>
+<li>postRender(): By default, this does nothing but when overridden this is called by the rendering view after render has completed.</li>
+</ul>
+
+<h4>ClientMVC.View.Elements</h4>
+
+<p>This namespace is created in Client MVC so that elements for each view can be appended to it for reference elsewhere in the custom view code. Elements would potentially look like this but are entirely optional...</p>
+
+<pre><code>ClientMVC.View.Elements.MyView = {
+    username : '#email',
+    password : '#password',
+    loginButton : '#form input[type=submit]'
+};
+</code></pre>
+
+<p>VIEW LIFECYCLE: Client MVC views maintain their bindings and have specific methods to dispose all of the events they use. When used in conjunction with a Region, to represent the holding area for the view, these methods ensure that orphan views and events within a region are always removed when not used anymore preventing memory leaks.</p>
+
+<h4>ClientMVC.View.Event</h4>
+
+<p>An event represents an event handler for an item on the template, wrapping a jQuery style event. When writing the event callback function the value 'this' is bound to the event as the parent object using prototype.bind().</p>
+
+<p>A sample event can be seen in the view documentation above. Unlike most of the other elements of Client MVC, events are not overridden they are just created using 'new ClientMVC.View.Event()' and passing in a jQuery selector for the item, the name of the event and the function to execute when the event occurs.</p>
+
+<p>An event has methods for bind and clear (called bindEvent and clearEvent). These methods are called by the view that the event belongs to automatically by the view's bind and clear methods (which are, in turn, called by the region).</p>
+
+<h4>ClientMVC.Router</h4>
+
+<p>The routing system. Routers map faux-URLs to actions, and fire events when routes are matched. The router and history sections in ClientMVC are based on Backbone.</p>
+
+<p>A sample router could look something like this...    </p>
+
+<pre><code>var router = ClientMVC.Router.extend({
+
+    name : 'my router',
+
+    init : function() {
+        // Do some auth stuff here
+    },
+
+    routes: [
+        new ClientMVC.Router.Route('search/*query', function(query) {
+            alert(query);
+        }, 'searchRoute'),
+        new ClientMVC.Router.Route('posts/:id', function(id) {
+            alert(id);
+        }, 'searchRoute'),
+        new ClientMVC.Router.Route('posts/:id/:pref', function(id, pref) {
+            alert(id + ' Ordered from ' + pref);
+        }, 'searchRoute'),
+        new ClientMVC.Router.Route('home', function() {
+            alert('You are home');
+        }, 'homeRoute'),
+        new ClientMVC.Router.Route('away', function() {
+            alert('You are away');
+        }, 'awayRoute'),
+        new ClientMVC.Router.Route('*action', function(action) {
+            alert('You are at ' + action);
+        }, 'defaultRoute')
+    ]
+
+});
+</code></pre>
+
+<p>For a routed app the router is a key component so you may wish to attach it yo your application's namespace.</p>
+
+<p>Many of the properties of the base router can be overridden as indicated in the sample view defined above. The routes array must be overridden in order to set up the routes themselves. It is unlikely that you would wish to override any of the other elements in most cases as it is nicely self contained. The router uses ClientMVC.History's default implementation (see below).</p>
+
+<h4>ClientMVC.Router.Route</h4>
+
+<p>A route is a simple object structure definition that represents a route. A route consists of a route, a callback and a name. The roter example above shows construction of Route objects.</p>
+
+<h4>ClientMVC.History</h4>
+
+<p>The History system handles the management of forward and back using hash change and / or push state. This functionality is lifted almost line for line from Backbone.</p>
+
+<p>The router uses the default history implementation of ClientMVC.history. If you override any functionality to create your own implementation of history it should be loaded in the same namespace to connect up to the rest of Client MVC as follows...</p>
+
+<pre><code>ClientMVC.history = ClientMVC.History.extend({
+
+    name : 'my history'
+});
+</code></pre>
+
+<p>Cross-browser history management is based on either <a href="http://diveintohtml5.info/history.html">pushState</a> and real URLs, or <a href="https://developer.mozilla.org/en-US/docs/DOM/window.onhashchange">onhashchange</a> and URL fragments. If the browser supports neither (old IE, natch) it falls back to polling.</p>
+
+<h3>Javascript Functional Extensions</h3>
+
+<p>As well as the core part of Client MVC itself, the library also adds the following global Javascript helpers to aid in creating more terse, readable code...</p>
+
+<ul>
+<li>Object.hasValue - Returns true if the object is not undefined, null or empty</li>
+<li>Object.exists - Returns true if the object is not undefined or null</li>
+<li>Object.isTruthy - Returns true if the object is not undefined or null and is true</li>
+<li>Object.isFunction - Returns true if the object is not undefined or null and is a function</li>
+<li>String.trim() - Set up if not supported by the target browser</li>
+<li>String.ltrim() - Set up if not supported by the target browser</li>
+<li>String.rtrim() - Set up if not supported by the target browser</li>
+<li>String.fulltrim() - Set up if not supported by the target browser</li>
+<li>String.escapeRegExp() - Escape regular expressions</li>
+<li>String.replaceAll(find, replace) - Find and replace one value with another</li>
+</ul>
+
+<h3>How do I get set up?</h3>
+
+<p>Client MVC is designed to be used either traditionallly, exposing itself as a global scope object, or through an AMD pattern implemented by a product like RequireJS.</p>
+
+<h4>To set up as a Global scope object</h4>
+
+<p>Add a reference to Client MVC and it's dependencies to your page as follows. Paths may vary, but the paths given here assume that the reference was obtained from NPM...</p>
+
+<pre><code>&lt;script src="node_modules/client-mvc/node_modules/underscore/underscore.js"&gt;&lt;/script&gt;
+&lt;script src="node_modules/client-mvc/client-mvc.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Client MVC has an additional dependency on jQuery. This is not hardcoded into the NPM package to allow you to use the version of jQuery suited to your project and locate it where you like.</p>
+
+<h4>To set up with RequireJS</h4>
+
+<p>With RequireJS in use I use the following as a base RequireJS config (again assuming NPM paths)...</p>
+
+<pre><code>require.config({
+    baseUrl: "{insert your app base url here - commonly empty, app/ or scripts/}",
+    paths: {
+        jquery: "node_modules/jquery/dist/jquery",
+        underscore: "node_modules/client-mvc/node_modules/underscore/underscore",
+        client-mvc: "node_modules/client-mvc/client-mvc"
+    },
+    shim: {
+        jquery: { exports: '$' },
+        underscore: { exports: '_' },
+        client-mvc: { deps: ['underscore', 'jquery'], exports: 'MVC' }
+    }
+});
+</code></pre>
+
+<h3>Advanced Usage Patterns</h3>
+
+<p>For more complex products I recommend using a patter that allows you to create your own variation of the key Client MVC objects that extend the main object elements themselves. This allows for integration of client mvc updates while minimising the potential for breaking your code but allows you to slip in your own variations into the design for your own app.</p>
+
+<p>In a global scope object style a sample extended version of Client MVC may look something like this...</p>
+
+<pre><code>(function() {
+
+    if (window.ClientMVC === undefined)
+        throw 'ClientMVC has not been set up on the page.';
+
+    window.MyMVC = window.MyMVC || {};
+
+    window.MyMVC.Controller = window.ClientMVC.Controller;
+    window.MyMVC.AuthController = window.ClientMVC.AuthController;
+    window.MyMVC.View = window.ClientMVC.View;
+
+    window.MyMVC.SecuredController = window.ClientMVC.SecuredController.extend({
+
+        // Your customisation code here
+
+    });
+
+    window.MyMVC.Region = window.ClientMVC.Region.extend({
+
+        // Your customisation code here.
+
+    });
+
+    window.MyMVC.Router = window.ClientMVC.Router.extend({
+
+        routes: [
+            // new routes here.
+        ]
+
+    });
+})();
+</code></pre>
+
+<p>Using RequireJS (which I wholeheartedly recommend for SPA projects) it would look like this...</p>
+
+<pre><code>define(['client-mvc'],
+    function(ClientMVC) {
+
+        var exSecureController = ClientMVC.SecuredController.extend({
+
+            // Your customisation code here
+
+        });
+
+        var exRegion = ClientMVC.Region.extend({
+
+            // Your customisation code here.
+
+        });
+
+        var appRouter = ClientMVC.Router.extend({
+
+            routes: [
+                // new routes here.
+            ]
+
+        });
+
+        return {
+            Controller: ClientMVC.Controller,
+            AuthController: ClientMVC.AuthController,
+            SecuredController: exSecureController,
+            View: ClientMVC.View,
+            Region: exRegion,
+            Router : appRouter
+        };
+    });
+</code></pre>
+        </div>
+        <a class="element-block__footer-link-wrapper" href="http://github.com/ministryotech" target="_blank">
+            <footer class="element-block__footer">
+                <i class="pre-icon fa fa-github-square"></i>
+                <span class="element-block__footer__link-text">Visit us on GitHub</span>
+                <i class="post-icon fa fa-external-link"></i>
+            </footer>
+        </a>
+    </section>
+<section class="element-block element-block--main">
+    <div id="disqus_thread" class="element-block__content element-block__content--no-footer"></div>
+</section>
+</div>
+<nav class="sidebar sidebar--external-project-links">
+    <dl>
+                <dd class="ungrouped">
+                    <i class="pre-icon fa fa-github"></i><a href="https://github.com/ministryotech/client-mvc" target="_blank">View on GitHub</a>
+                    <i class="post-icon fa fa-external-link"></i>
+                </dd>
+                <dd class="ungrouped">
+                    <i class="pre-icon fa fa-codepen"></i><a href="https://www.npmjs.com/package/client-mvc" target="_blank">Install from NPM</a>
+                    <i class="post-icon fa fa-external-link"></i>
+                </dd>
+    </dl>
+</nav>
+<nav class="sidebar sidebar--services-selector">
+    <h1><i class="pre-icon fa fa-code-fork"></i> <a href="../index.html">Open Source</a></h1>
+    <ul>
+            <li><a class="" href="../api-security/index.html">API Security</a></li>
+            <li><a class="" href="../argument-guard/index.html">Argument Guard</a></li>
+            <li><a class="" href="../backbone-ribs/index.html">Backbone Ribs</a></li>
+            <li><a class="selected" href="index.html">Client MVC</a></li>
+            <li><a class="" href="../compositions/index.html">Compositions</a></li>
+            <li><a class="" href="../csv/index.html">CSV</a></li>
+            <li><a class="" href="../date-time-abstractions/index.html">Date Time Abstractions</a></li>
+            <li><a class="" href="../entity-framework-repolayer/index.html">Entity Framework RepoLayer</a></li>
+            <li><a class="" href="../fluent-guard/index.html">Fluent Guard</a></li>
+            <li><a class="" href="../iis-multi-host-redirector/index.html">IIS Multi-Host Redirector</a></li>
+            <li><a class="" href="../javascript-on-load-function-stack/index.html">JavaScript On Load Function Stack</a></li>
+            <li><a class="" href="../model-builder-abstractions/index.html">Model Builder Abstractions</a></li>
+            <li><a class="" href="../reflection-helper/index.html">Reflection Helper</a></li>
+            <li><a class="" href="../responsive-mq/index.html">Responsive MQ</a></li>
+            <li><a class="" href="../simple-twitter-stream/index.html">Simple Twitter Stream</a></li>
+            <li><a class="" href="../strong-typed/index.html">Strong Typed</a></li>
+            <li><a class="" href="../test-support/index.html">Test Support</a></li>
+            <li><a class="" href="../umbraco-pylon/index.html">Umbraco Pylon</a></li>
+            <li><a class="" href="../uri-path-manager/index.html">URI Path Manager</a></li>
+            <li><a class="" href="../url-navigator/index.html">URL Navigator</a></li>
+            <li><a class="" href="../web-theming/index.html">Web Theming</a></li>
+            <li><a class="" href="../webdriver-extensions/index.html">WebDriver Extensions</a></li>
+            <li><a class="" href="../window-wrapper/index.html">Window Wrapper</a></li>
+    </ul>
+</nav>
+<script type="text/javascript">
+    var disqus_identifier = 'www.minotech.co.uk-article-1276';
+    var disqus_title = 'Client MVC';
+    var disqus_url = 'index.html';
+</script>
+
+            </div>
+        </div>
+        <footer class="brand-footer">
+            <div class="brand-footer__notes">
+                <p class="brand-footer__copyright"><i class="fa fa-copyright"></i> 2021 Keith Jackson (The Ministry of Technology)</p>
+                <p class="brand-footer__strapline">
+                    Pragmatic Agile Coaching & Consultancy, Software Development & Technical Architecture - Web, Cloud, Apps & Agile for
+                    an Alternative audience.
+                </p>
+                <p class="brand-footer__links">
+                    <a href="../../../elements/privacy-policy.html">Privacy Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/cookies-policy.html">Cookies Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/terms-and-conditions.html">Terms & Conditions</a>
+                </p>
+            </div>
+            <aside class="brand-footer__logos">
+                <section class="logos">
+    <div class="logos__social">
+        <a href="https://www.linkedin.com/company/the-ministry-of-technology/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--linkedin fa fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/ministryotech" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--twitter fa fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/agilerodent/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--instagram fa fa-instagram"></i>
+        </a>
+    </div>
+</section>
+            </aside>
+        </footer>
+        <!--<![endif]-->
+        <div class="clear"></div>
+    </div>
+    <script src="../../../js/head-1.0.3.min.js"></script>
+    <script>
+        head.js(
+'../../../3rd-party/ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+'../../../js/ministry.min91af.js?v=7.1.0.25813',
+'../../../js/analytics91af.js?v=7.1.0.25813'
+);
+
+    </script>
+</body>
+
+<!-- Mirrored from www.minotech.co.uk/development/open-source-projects/client-mvc/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:45 GMT -->
+</html>

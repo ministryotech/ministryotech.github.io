@@ -1,0 +1,187 @@
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from www.minotech.co.uk/development/blog/entity-framework-repositories-now-on-nuget/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <script>
+        // Pure JavaScript 'JS enabled' hook for styling
+        var _ = document.getElementsByTagName('html')[0];
+        _.className = _.className.replace(/(?:^|\s)no-js(?!\S)/g, 'js');
+    </script>
+
+    <meta charset="utf-8" />
+    <title>Entity Framework Repositories - now on nuget - The Ministry of Technology</title>
+    <meta name="description" content="Holistic Technical Counsel - Agile Software Development & Management with a difference" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Icons -->
+    <link rel="shortcut icon" href="../../../images/ministry/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../images/ministry/apple-touch-icon-114x114-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../images/ministry/apple-touch-icon-72x72-precomposed9078.png?v=7.1.0.25803" />
+    <link rel="apple-touch-icon-precomposed" href="../../../images/ministry/apple-touch-icon-precomposed9078.png?v=7.1.0.25803" />
+    <!-- Core styles -->
+    <link rel="stylesheet" href="../../../3rd-party/maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../css/development-style.min91af.css?v=7.1.0.25813" />
+    <!-- References -->
+    <link rel="author" href="../../../humans.txt" />
+
+    <!-- Scripts to execute before page load begins -->
+    <script src="../../../3rd-party/use.typekit.net/sha1jar.js"></script>
+    <script>try { Typekit.load(); } catch (e) { }</script>
+</head>
+<body class="dev-body">
+    <div class="wide-bg">
+        <img src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="" />
+    </div>
+    <div class="outer">
+        <header>
+            <a href="../../../developers/index.html" title="Ministry of Technology"><img class="brand-heading" src="../../../images/development/logo-text9078.svg?v=7.1.0.25803" alt="Ministry of Technology" /></a>
+            <!--[if IE]><p>This site is optimised for HTML5 and CSS3 and is not supported by IE9 or lower. <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->
+<i class="menu-button fa fa-bars"></i>
+<nav id="js-nav" class="bp-wide">
+    <ul>
+                <li><a href="../../../index.html">Home</a></li>                <li><a href="../../index.html">Development</a></li>                <li><a href="../../mentoring/index.html">Mentoring</a></li>                <li><a class="selected" href="../index.html">Blog</a></li>                <li><a href="../../open-source-projects/index.html">Open Source</a></li>                <li><a href="../../../contact/index.html">Contact</a></li>    </ul>
+</nav>        </header>
+        <!--[if gt IE 9]><!-->
+        <div class="inner">
+            <section class="page-title-or-logo">
+                    <h1> Entity Framework Repositories - now on nuget </h1>
+                                    <section class="subdata">
+                        
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 01/11/2013</span>
+    
+                    </section>
+            </section>
+            <img class="mobile-fold" src="../../../images/development/background9078.svg?v=7.1.0.25803" alt="Show Menu" />
+            <div class="block-container ">
+                    <section class="element-block element-block--intro element-block--title">
+                        <div class="element-block__content">
+                            <h1> Entity Framework Repositories - now on nuget </h1>
+                                <section class="subdata">
+                                    
+    <span class="article-metadata article-metadata--heavy"><i class="article-metadata__icon fa fa-pencil"></i>By <a href="../../../network/keith-jackson/index.html">Keith Jackson</a> <i class="article-metadata__separator fa fa-circle"></i> 01/11/2013</span>
+    
+                                </section>
+                        </div>
+                    </section>
+                
+
+
+
+<div class="main-strip">
+    <section class="element-block element-block--main">
+        <article class="element-block__content">
+    <p>We've been working with T4 templates for use with Entity Framework for a couple of years now. T4 templates are great because they actually let you write code to generate code so you can say goodbye to a load of unnecessary boilerplate.</p>
+<p>We really like Entity Framework as an ORM tool, but where it's always fallen down has been in an ability to easilly unit test the applications that use it (particularly back when we started, before the common usage of POCOs and DbContext). In order to mitigate these problems we began work on developing a T4 template that would auto generate a repository pattern infrastrucre from the EDMX file generated by Entity Framework. You can then use the repositories for accessing data, a Repository Factory for accessing the repositories themselves and maintaining save state and all with built in interfaces that can be easilly mocked. This also allows you to add alternative data sources to the same model by adding additional classes. </p>
+<p>Unit testing is a straightforward matter of then mocking the Repository Factory interface and then adding the needed repository mocks for each testing layer. All of the autogenerated classes are rendered as Partial Classes, so you can easilly add custom functionality in addition to the default generated methods of...</p>
+<ul>
+<li>ByID()</li>
+<li>All()</li>
+<li>Add()</li>
+<li>Delete()</li>
+<li>Edit()</li>
+</ul>
+<p>We've now done a new version of the template that should work with DbContext and POCOs in pretty much the same way (although it's easier to test the POCO approach, I still prefer the repository layer for data source abstraction).</p>
+<p>The ObjectContext version is pretty solid and there is a version out now for EF 4.3.1, 5 and 6. The DbContext one hasn't been tested in anger yet, so any issues you may find please let us know - we've set up an issue tracker on BitBucket at <a rel="noopener" href="https://bitbucket.org/ministryotech/repolayer/issues" target="_blank" title="https://bitbucket.org/ministryotech/repolayer/issues">https://bitbucket.org/ministryotech/repolayer/issues</a></p>
+<p>You can get the template from nuget - just search for 'Ministry' or check out the package pages here...</p>
+<ul>
+<li><a rel="noopener" href="https://www.nuget.org/packages/Ministry.EntityFrameworkRepositoryBuilder.ObjectContext.Ef4/" target="_blank" title="ObjectContext (Entities) for EF4.3.1">Ministry.EntityFrameworkRepositoryBuilder.ObjectContext.Ef4/</a></li>
+<li><a rel="noopener" href="https://www.nuget.org/packages/Ministry.EntityFrameworkRepositoryBuilder.ObjectContext.Ef5/" target="_blank" title="ObjectContext (Entities) for EF5">Ministry.EntityFrameworkRepositoryBuilder.ObjectContext.Ef5/</a></li>
+<li><a rel="noopener" href="https://www.nuget.org/packages/Ministry.EntityFrameworkRepositoryBuilder.ObjectContext.Ef6/" target="_blank" title="ObjectContext (Entities) for EF6">Ministry.EntityFrameworkRepositoryBuilder.ObjectContext.Ef6/</a></li>
+<li><a rel="noopener" href="https://www.nuget.org/packages/Ministry.EntityFrameworkRepositoryBuilder.DbContext.Ef5/" target="_blank" title="DbContext (POCOs) for EF5">Ministry.EntityFrameworkRepositoryBuilder.DbContext.Ef5/</a></li>
+<li><a rel="noopener" href="https://www.nuget.org/packages/Ministry.EntityFrameworkRepositoryBuilder.DbContext.Ef6/" target="_blank" title="DbContext (POCOs) for EF6">Ministry.EntityFrameworkRepositoryBuilder.DbContext.Ef6/</a></li>
+</ul>
+<h2>Using Entities (ObjectContext) with EF6</h2>
+<p>This is rather broken on the Microsoft side of things - if you upgrade an EDMX the code generation strategy still generates code using the wrong namespaces for EF 6. You can fix this by right clicking the EDMX surface, selecting 'Add Code Generation Item' and selecting 'EF6.x EntityObject Generator' - If it's not available locally it'll be available in the 'online' section. Marry this with the new EF6 ObjectContext Repo template and you should be good to go.</p>
+</article>
+        <footer class="element-block__footer">
+                <a href="../azure-not-a-lean-solution/index.html">
+        <i class="pre-icon fa fa-arrow-left"></i>
+        <span class="element-block__footer__link-text">Previous Article</span>
+    </a>
+    <a href="../azure-umbraco-friends-at-last/index.html">
+        <i class="post-icon fa fa-arrow-right"></i>
+        <span class="element-block__footer__link-text element-block__footer__link-text--right">Next Article</span>
+    </a>
+
+        </footer>
+    </section>
+    <section class="element-block element-block--main">
+        <div id="disqus_thread" class="element-block__content element-block__content--no-footer"></div>
+    </section>
+</div>
+<nav class="sidebar sidebar--articles-selector">
+            <h1><i class="pre-icon fa fa-file-text"></i> <a href="../index.html">Latest Entries</a></h1>
+    <ul>
+                <li><a href="../the-pylon-is-live/index.html">The Pylon is Live</a></li>
+                <li><a href="../umbraco-published-content-seems-wrong/index.html">Umbraco Published Content seems wrong</a></li>
+                <li><a href="../open-source-products-refreshed/index.html">Open Source Products - Refreshed</a></li>
+                <li><a href="../testing-web-api-routes-with-ministry-open-source/index.html">Testing Web API Routes with Ministry Open Source</a></li>
+                <li><a href="../azure-umbraco-friends-at-last/index.html">Azure &amp; Umbraco - Friends at Last?</a></li>
+                <li><a class="selected" href="index.html">Entity Framework Repositories - now on nuget</a></li>
+                <li><a href="../azure-not-a-lean-solution/index.html">Azure - Not a lean solution</a></li>
+                <li><a href="../migrating-umbraco-5-to-umbraco-411/index.html">Migrating Umbraco 5 to Umbraco 4.11</a></li>
+                <li><a href="../testing-mvc-routes-with-ministry-open-source/index.html">Testing MVC Routes with Ministry Open Source</a></li>
+                <li><a href="../detecting-touch-devices/index.html">Detecting Touch Devices</a></li>
+
+    </ul>
+
+</nav>
+<script type="text/javascript">
+    var disqus_identifier = 'www.minotech.co.uk-article-1129';
+    var disqus_title = 'Entity Framework Repositories - now on nuget';
+    var disqus_url = 'index.html';
+</script>
+
+            </div>
+        </div>
+        <footer class="brand-footer">
+            <div class="brand-footer__notes">
+                <p class="brand-footer__copyright"><i class="fa fa-copyright"></i> 2021 Keith Jackson (The Ministry of Technology)</p>
+                <p class="brand-footer__strapline">
+                    Pragmatic Agile Coaching & Consultancy, Software Development & Technical Architecture - Web, Cloud, Apps & Agile for
+                    an Alternative audience.
+                </p>
+                <p class="brand-footer__links">
+                    <a href="../../../elements/privacy-policy.html">Privacy Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/cookies-policy.html">Cookies Policy</a>
+                    &nbsp;|&nbsp;
+                    <a href="../../../elements/terms-and-conditions.html">Terms & Conditions</a>
+                </p>
+            </div>
+            <aside class="brand-footer__logos">
+                <section class="logos">
+    <div class="logos__social">
+        <a href="https://www.linkedin.com/company/the-ministry-of-technology/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--linkedin fa fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/ministryotech" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--twitter fa fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/agilerodent/" target="_blank">
+            <i class="logos__logo logos__social__logo logos__logo--instagram fa fa-instagram"></i>
+        </a>
+    </div>
+</section>
+            </aside>
+        </footer>
+        <!--<![endif]-->
+        <div class="clear"></div>
+    </div>
+    <script src="../../../js/head-1.0.3.min.js"></script>
+    <script>
+        head.js(
+'../../../3rd-party/ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+'../../../js/ministry.min91af.js?v=7.1.0.25813',
+'../../../js/analytics91af.js?v=7.1.0.25813'
+);
+
+    </script>
+</body>
+
+<!-- Mirrored from www.minotech.co.uk/development/blog/entity-framework-repositories-now-on-nuget/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 11:30:41 GMT -->
+</html>
